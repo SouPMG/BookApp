@@ -22,3 +22,6 @@ HEADERS  += mainwindow.h \
     book.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    library.qrc
