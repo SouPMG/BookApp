@@ -3,8 +3,6 @@
 
 #include <QString>
 
-using std::QString;
-
 class libraryItem {
 	private:
 		QString isbn;
