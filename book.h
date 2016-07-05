@@ -1,8 +1,11 @@
 #ifndef BOOK_H
 #define BOOK_H
 
+#include <iostream>
 #include <QString>
 #include "libraryitem.h"
+
+using std::ostream;
 
 class book : public libraryItem {
 	private:
@@ -29,6 +32,12 @@ class book : public libraryItem {
 		void setGenre(QString);
 		void setPages(unsigned int);
 		void setReleaseNumber(unsigned int);
+
+		// operators
+		bool operator==(const book&) const;
 };
+
+// external operators
+ostream& operator<<(ostream&, const book&) const;
 
 #endif // BOOK_H

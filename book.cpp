@@ -44,3 +44,13 @@ void book::setPages(unsigned int numberOfPages) {
 void book::setReleaseNumber(unsigned int releaseNumber) {
 	release = releaseNumber;
 }
+
+/* Operators */
+
+bool book::operator==(const book& b) const {
+	return this->isbn == b.isbn;
+}
+
+ostream& operator<<(ostream& os, const book& b) {
+	return os << "ISBN: " << b.getIsbn() << " Title: " << b.getTitle();
+}
