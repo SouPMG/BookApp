@@ -1,24 +1,24 @@
 #include "libraryitem.h"
 
 // Every parameter has a default value except the first one (isbn). For details check libraryitem.h
-libraryItem::libraryItem ( string isbn, string title, string publisher, string cover, unsigned int year, unsigned int rating )
+libraryItem::libraryItem(QString isbn, QString title, QString publisher, QString cover, unsigned int year, unsigned int rating)
 	: isbn(isbn), title(title), publisher(publisher), coverImage(cover), yearPublished(year), rating(rating) {}
 
 /* getter methods */
 
-string libraryItem::getIsbn() const {
+QString libraryItem::getIsbn() const {
 	return isbn;
 }
 
-string libraryItem::getTitle() const {
+QString libraryItem::getTitle() const {
 	return title;
 }
 
-string libraryItem::getPublisher() const {
+QString libraryItem::getPublisher() const {
 	return publisher;
 }
 
-string libraryItem::getCoverImage() const {
+QString libraryItem::getCoverImage() const {
 	return coverImage;
 }
 
@@ -32,22 +32,22 @@ unsigned int libraryItem::getRating() const {
 
 /* setter methods */
 
-void libraryItem::setTitle ( string newTitle ) {
+void libraryItem::setTitle(QString newTitle) {
 	title = newTitle;
 }
 
-void libraryItem::setPublisher ( string newPublisher ) {
+void libraryItem::setPublisher(QString newPublisher) {
 	publisher = newPublisher;
 }
 
-void libraryItem::setCoverImage ( string newCoverImage ) {
+void libraryItem::setCoverImage(QString newCoverImage) {
 	coverImage = newCoverImage;
 }
 
-void libraryItem::setPublicationYear ( unsigned int newYear ) {
+void libraryItem::setPublicationYear(unsigned int newYear) {
 	yearPublished = newYear;
 }
 
-void libraryItem::rate ( unsigned int newRating ) {
+void libraryItem::rate(unsigned int newRating) {
 	rating = newRating;
 }
