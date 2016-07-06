@@ -5,12 +5,12 @@ book::book(QString isbn, QString title, QString publisher, QString cover, unsign
 			 QString author, QString genre, unsigned int pages, unsigned int release)
 	: libraryItem(isbn, title, publisher, cover, year, rating), author(author), genre(genre), pages(pages), release(release) {}
 
-/* getter methods */
-
+// virtual clone method overloaded
 book* book::clone() const {
 	return new book ( *this );
 }
 
+// getter methods
 QString book::getAuthor() const {
 	return author;
 }
@@ -27,8 +27,7 @@ unsigned int book::getReleaseNumber() const {
 	return release;
 }
 
-/* setter methods */
-
+// setter methods
 void book::setAuthor(QString newAuthor) {
 	author = newAuthor;
 }
@@ -45,8 +44,7 @@ void book::setReleaseNumber(unsigned int releaseNumber) {
 	release = releaseNumber;
 }
 
-/* Operators */
-
+// operators
 bool book::operator==(const book& b) const {
 	return this->isbn == b.isbn;
 }
