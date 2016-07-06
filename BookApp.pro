@@ -16,12 +16,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     libraryitem.cpp \
     book.cpp \
-    ebook.cpp
+    ebook.cpp \
+    library.cpp
 
 HEADERS  += mainwindow.h \
     libraryitem.h \
     book.h \
-    ebook.h
+    ebook.h \
+    library.h
 
 FORMS    += mainwindow.ui
 
