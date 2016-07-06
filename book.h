@@ -38,6 +38,6 @@ class book : public libraryItem {
 };
 
 // external operators
-ostream& operator<<(ostream&, const book&) const;
+ostream& operator<<(ostream&, const book&);
 
 #endif // BOOK_H

@@ -17,10 +17,10 @@ class ebook : public libraryItem {
 	public:
 		// constructor
 		ebook(QString, QString = "undefined", QString = "undefined", QString = "undefined", unsigned int = 1900, unsigned int = 0,
-				QString = "undefined", QString = "undefined", unsigned int = 0, unsigned int = 0);
+				QString = "undefined", QString = "undefined", QString = "undefined", float = 0, unsigned int = 0);
 
 		// implementation of pure virtual methods inherited by libraryItem
-		virtual book* clone() const;
+		virtual ebook* clone() const;
 
 		// getter methods
 		QString getAuthor() const;
@@ -41,6 +41,6 @@ class ebook : public libraryItem {
 };
 
 // external operators
-ostream& operator<<(ostream&, const ebook&) const;
+ostream& operator<<(ostream&, const ebook&);
 
 #endif // EBOOK_H

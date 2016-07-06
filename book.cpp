@@ -46,7 +46,7 @@ void book::setReleaseNumber(unsigned int releaseNumber) {
 
 // operators
 bool book::operator==(const book& b) const {
-	return this->isbn == b.isbn;
+	return getIsbn() == b.getIsbn();
 }
 
 ostream& operator<<(ostream& os, const book& b) {

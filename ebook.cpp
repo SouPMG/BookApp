@@ -1,9 +1,9 @@
 #include "ebook.h"
 
 // can be instantiated specifying only the isbn, everything else has a default value
-ebook::ebook ( string isbn, string title, string publisher, string cover, unsigned int year, unsigned int rating,
-			   string author, string genre, string format, float size, unsigned int pages )
-	: libraryItem(isbn, title, publisher, cover, year, rating), author(author), genre(genre), format(format), size(size), pages(pages) {}
+ebook::ebook ( QString isbn, QString title, QString publisher, QString cover, unsigned int year, unsigned int rating,
+			   QString author, QString genre, QString format, float size, unsigned int pages )
+	: libraryItem(isbn, title, publisher, cover, year, rating), author(author), genre(genre), format(format), fileSize(size), pages(pages) {}
 
 // virtual clone method overloaded
 ebook* ebook::clone() const {
@@ -11,15 +11,15 @@ ebook* ebook::clone() const {
 }
 
 // getter methods
-string ebook::getAuthor() const {
+QString ebook::getAuthor() const {
 	return author;
 }
 
-string ebook::getGenre() const {
+QString ebook::getGenre() const {
 	return genre;
 }
 
-string ebook::getFormat() const {
+QString ebook::getFormat() const {
 	return format;
 }
 
@@ -32,15 +32,15 @@ unsigned int ebook::numberOfPages() const {
 }
 
 // setter methods
-void ebook::setAuthor ( string newAuthor ) {
+void ebook::setAuthor ( QString newAuthor ) {
 	author = newAuthor;
 }
 
-void ebook::setGenre ( string newGenre ) {
+void ebook::setGenre ( QString newGenre ) {
 	genre = newGenre;
 }
 
-void ebook::setFormat ( string newFormat ) {
+void ebook::setFormat ( QString newFormat ) {
 	format = newFormat;
 }
 
@@ -54,7 +54,7 @@ void ebook::setPages ( unsigned int numberOfPages ) {
 
 // operators
 bool ebook::operator==(const ebook& b) const {
-	return this->isbn == b.isbn;
+	return getIsbn() == b.getIsbn();
 }
 
 ostream& operator<<(ostream& os, const ebook& b) {
