@@ -15,11 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     libraryitem.cpp \
-    book.cpp
+    book.cpp \
+    ebook.cpp
 
 HEADERS  += mainwindow.h \
     libraryitem.h \
-    book.h
+    book.h \
+    ebook.h
 
 FORMS    += mainwindow.ui
 
