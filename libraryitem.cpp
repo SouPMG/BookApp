@@ -51,3 +51,8 @@ void libraryItem::setPublicationYear(unsigned int newYear) {
 void libraryItem::rate(unsigned int newRating) {
 	rating = newRating;
 }
+
+// operators
+bool libraryItem::operator==(const libraryItem& item) const {
+	return getIsbn() == item.getIsbn();
+}

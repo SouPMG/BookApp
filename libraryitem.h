@@ -32,6 +32,9 @@ class libraryItem {
 		void setCoverImage(QString);
 		void setPublicationYear(unsigned int);
 		void rate(unsigned int);
+
+		// operators
+		bool operator==(const libraryItem&) const;
 };
 
 #endif // LIBRARYITEM_H
