@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>933</width>
-    <height>629</height>
+    <width>701</width>
+    <height>355</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -23,11 +23,37 @@
    <widget class="QListView" name="libraryListView">
     <property name="geometry">
      <rect>
+      <x>9</x>
+      <y>29</y>
+      <width>191</width>
+      <height>261</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="libraryLabel">
+    <property name="geometry">
+     <rect>
       <x>10</x>
       <y>10</y>
-      <width>241</width>
-      <height>561</height>
+      <width>191</width>
+      <height>16</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>Your library:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="mainTextLabel">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>10</y>
+      <width>481</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
     </property>
    </widget>
   </widget>
@@ -36,7 +62,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>933</width>
+     <width>701</width>
      <height>21</height>
     </rect>
    </property>
@@ -44,10 +70,17 @@
     <property name="title">
      <string>Book</string>
     </property>
-    <addaction name="actionAdd_Book"/>
-    <addaction name="actionRemove_Book"/>
+    <addaction name="actionAddBook"/>
+    <addaction name="actionRemoveBook"/>
+   </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>?</string>
+    </property>
+    <addaction name="actionAboutBookApp"/>
    </widget>
    <addaction name="menuBook"/>
+   <addaction name="menu"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -56,16 +89,23 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionAddBook"/>
+   <addaction name="actionRemoveBook"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionAdd_Book">
+  <action name="actionAddBook">
    <property name="text">
     <string>Add Book</string>
    </property>
   </action>
-  <action name="actionRemove_Book">
+  <action name="actionRemoveBook">
    <property name="text">
     <string>Remove Book</string>
+   </property>
+  </action>
+  <action name="actionAboutBookApp">
+   <property name="text">
+    <string>About BookApp</string>
    </property>
   </action>
  </widget>

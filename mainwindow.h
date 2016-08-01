@@ -21,6 +21,11 @@ class MainWindow : public QMainWindow {
 	public:
 		explicit MainWindow(QWidget *parent = 0);
 		~MainWindow();
+
+	private slots:
+		void on_actionAddBook_triggered();
+		void on_actionRemoveBook_triggered();
+		void on_actionAboutBookApp_triggered();
 };
 
 #endif // MAINWINDOW_H
