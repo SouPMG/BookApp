@@ -3,16 +3,14 @@
 
 #include "libraryitem.h"
 
-template <class T>
 class library {
 	private:
 		// internal private class node
-		template <class T>
 		class node {
 			public:
 				node();
-				node(const T&, node*);
-				T info;
+				node(libraryItem*, node*);
+				libraryItem* info;
 				node* next;
 		};
 		node* first;
@@ -20,9 +18,9 @@ class library {
 	public:
 		library();
 		bool empty() const;
-		void addItem(T);
-		void removeItem(T);
-		T extract();
+		void addItem(libraryItem*);
+		void removeItem(libraryItem*);
+		libraryItem* extract();
 };
 
 #endif // LIBRARY_H

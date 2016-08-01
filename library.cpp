@@ -1,27 +1,21 @@
 #include "library.h"
 
-template<class T>
 library::library() : first(0) {}
 
-template<class T>
 library::node::node() : next(0) {}
 
-template<class T>
-library::node::node(const T &item, node* n) : info(item), next(n) {}
+library::node::node(libraryItem *item, node *n) : info(item), next(n) {}
 
-template<class T>
 bool library::empty() const {
 	return first == 0;
 }
 
-template<class T>
-void library::addItem(T newItem) {
+void library::addItem(libraryItem *newItem) {
 	first = new node(newItem, first);
 }
 
-template<class T>
-void library::removeItem(T item) {
-	node* n = first, *prev = 0;
+void library::removeItem(libraryItem *item) {
+	node *n = first, *prev = 0;
 
 	while (n && !(n->info == item)) {
 		prev = n;
@@ -38,11 +32,10 @@ void library::removeItem(T item) {
 	}
 }
 
-template<class T>
-T library::extract() {
+libraryItem* library::extract() {
 	node* n = first;
 	first = first->next;
-	T aux = n->info;
+	libraryItem* aux = n->info;
 	delete n;
 	return aux;
 }
