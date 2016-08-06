@@ -70,14 +70,14 @@
     <property name="title">
      <string>Book</string>
     </property>
-    <addaction name="actionAddBook"/>
-    <addaction name="actionRemoveBook"/>
+    <addaction name="addItemAction"/>
+    <addaction name="removeItemAction"/>
    </widget>
    <widget class="QMenu" name="menu">
     <property name="title">
      <string>?</string>
     </property>
-    <addaction name="actionAboutBookApp"/>
+    <addaction name="aboutAction"/>
    </widget>
    <addaction name="menuBook"/>
    <addaction name="menu"/>
@@ -89,21 +89,27 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionAddBook"/>
-   <addaction name="actionRemoveBook"/>
+   <addaction name="addItemAction"/>
+   <addaction name="removeItemAction"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionAddBook">
+  <action name="addItemAction">
    <property name="text">
-    <string>Add Book</string>
+    <string>Add Item</string>
+   </property>
+   <property name="toolTip">
+    <string>Add a library item</string>
    </property>
   </action>
-  <action name="actionRemoveBook">
+  <action name="removeItemAction">
    <property name="text">
-    <string>Remove Book</string>
+    <string>Remove Item</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove a library item</string>
    </property>
   </action>
-  <action name="actionAboutBookApp">
+  <action name="aboutAction">
    <property name="text">
     <string>About BookApp</string>
    </property>

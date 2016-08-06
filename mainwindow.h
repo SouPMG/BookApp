@@ -18,14 +18,16 @@ class MainWindow : public QMainWindow {
 		Ui::MainWindow *ui;
 		QStringListModel *model;
 
+		void connectActions() const;
+
 	public:
 		explicit MainWindow(QWidget *parent = 0);
 		~MainWindow();
 
 	private slots:
-		void on_actionAddBook_triggered();
-		void on_actionRemoveBook_triggered();
-		void on_actionAboutBookApp_triggered();
+		void addItemActionTriggered(bool);
+		void removeItemActionTriggered(bool);
+		void aboutActionTriggered(bool);
 };
 
 #endif // MAINWINDOW_H
