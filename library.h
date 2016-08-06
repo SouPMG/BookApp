@@ -10,7 +10,7 @@ class library {
 			public:
 				node();
 				node(libraryItem*, node*);
-				libraryItem* info;
+				libraryItem* info; // pointer to pure virtual base class
 				node* next;
 		};
 		node* first;
