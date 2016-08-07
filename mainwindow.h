@@ -25,9 +25,10 @@ class MainWindow : public QMainWindow {
 		~MainWindow();
 
 	private slots:
-		void addItemActionTriggered(bool);
-		void removeItemActionTriggered(bool);
-		void aboutActionTriggered(bool);
+		// actions
+		void addItemActionTriggered();
+		void removeItemActionTriggered();
+		void aboutActionTriggered();
 };
 
 #endif // MAINWINDOW_H
