@@ -20,6 +20,9 @@ class AddItemWindow : public QDialog {
 		explicit AddItemWindow(QWidget *parent = 0);
 		~AddItemWindow();
 
+	private slots:
+		void newItemSubmitted();
+
 };
 
 #endif // ADDITEMWINDOW_H
