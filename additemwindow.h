@@ -13,8 +13,11 @@ class AddItemWindow : public QDialog {
 		Q_OBJECT
 
 	private:
+		// class widgets to show only when selected
+		QGroupBox *bookFormGroup;
+		QGroupBox *eBookFormGroup;
+
 		Ui::AddItemWindow *ui;
-		QVBoxLayout *mainLayout;
 		void setupAddItemForm();
 
 	public:
@@ -23,8 +26,8 @@ class AddItemWindow : public QDialog {
 
 	private slots:
 		void newItemSubmitted();
-		void addBookForm();
-		void addEBookForm();
+		void showBookForm();
+		void showEBookForm();
 
 };
 

@@ -9,8 +9,9 @@ AddItemWindow::AddItemWindow(QWidget *parent) : QDialog(parent), ui(new Ui::AddI
 	setModal(true);
 	QDialog::reject(); // Esc closes the window
 
-	mainLayout = new QVBoxLayout();
 	setupAddItemForm();
+
+	adjustSize();
 }
 
 AddItemWindow::~AddItemWindow() {
@@ -18,7 +19,7 @@ AddItemWindow::~AddItemWindow() {
 }
 
 void AddItemWindow::setupAddItemForm() {
-	// create labels and input widgets
+	// create base info form components
 	QRadioButton *radioButtonBook = new QRadioButton("Book", this);
 	QRadioButton *radioButtonEBook = new QRadioButton("E-Book", this);
 	radioButtonBook->setChecked(true);
@@ -83,38 +84,90 @@ void AddItemWindow::setupAddItemForm() {
 	QGroupBox *basicFormGroup = new QGroupBox("Basic informations", this);
 	basicFormGroup->setLayout(basicInfoForm);
 
+	// COMPONENTS SHOWN ONLY IF SELECTED //
+
+	// create book info form components
+	QLabel *bookAuthorLabel = new QLabel("Author: ", this);
+	QLineEdit *bookAuthorTextField = new QLineEdit(this);
+
+	QLabel *bookGenreLabel = new QLabel("Genre: ", this);
+	QLineEdit *bookGenreTextField = new QLineEdit(this);
+
+	QFormLayout *bookInfoForm = new QFormLayout();
+	bookInfoForm->addRow(bookAuthorLabel, bookAuthorTextField);
+	bookInfoForm->addRow(bookGenreLabel, bookGenreTextField);
+
+	bookFormGroup = new QGroupBox("Book informations", this);
+	bookFormGroup->setLayout(bookInfoForm);
+
+	// create e-book info form components
+	QLabel *eBookAuthorLabel = new QLabel("Author: ", this);
+	QLineEdit *eBookAuthorTextField = new QLineEdit(this);
+
+	QLabel *eBookGenreLabel = new QLabel("Genre: ", this);
+	QLineEdit *eBookGenreTextField = new QLineEdit(this);
+
+	QLabel *fileFormatLabel = new QLabel("File format: ", this);
+	QComboBox *fileFormatField = new QComboBox(this);
+	fileFormatField->addItem("*.acsm");
+	fileFormatField->addItem("*.mobi");
+	fileFormatField->addItem("*.epub");
+	fileFormatField->addItem("*.pdf");
+
+	QLabel *fileSizeLabel = new QLabel("File size (MB): ", this);
+	QSpinBox *fileSizeField = new QSpinBox(this);
+	fileSizeField->setMinimum(0);
+	fileSizeField->setValue(fileSizeField->minimum());
+
+	QLabel *eBookPagesLabel = new QLabel("Number of pages: ", this);
+	QSpinBox *eBookPagesField = new QSpinBox(this);
+	eBookPagesField->setMinimum(0);
+	eBookPagesField->setValue(eBookPagesField->minimum());
+
+	QFormLayout *eBookInfoForm = new QFormLayout();
+	eBookInfoForm->addRow(eBookAuthorLabel, eBookAuthorTextField);
+	eBookInfoForm->addRow(eBookGenreLabel, eBookGenreTextField);
+	eBookInfoForm->addRow(fileFormatLabel, fileFormatField);
+	eBookInfoForm->addRow(fileSizeLabel, fileSizeField);
+	eBookInfoForm->addRow(eBookPagesLabel, eBookPagesField);
+
+	eBookFormGroup = new QGroupBox("E-Book informations", this);
+	eBookFormGroup->setLayout(eBookInfoForm);
+
 	// setup widgets for the window main layout
+	QVBoxLayout *mainLayout = new QVBoxLayout();
 	mainLayout->addWidget(itemTypeGroup);
 	mainLayout->addWidget(basicFormGroup);
+	mainLayout->addWidget(bookFormGroup);
+	mainLayout->addWidget(eBookFormGroup);
 	mainLayout->addWidget(formResponse);
+
+	// hide e-book form until selected
+	eBookFormGroup->hide();
 
 	setLayout(mainLayout);
 
 	// connect components
 	connect(buttonOk, SIGNAL(clicked()), this, SLOT(newItemSubmitted()));
 	connect(buttonCancel, SIGNAL(clicked()), this, SLOT(close()));
-	connect(radioButtonBook, SIGNAL(clicked()), this, SLOT(addBookForm()));
-	connect(radioButtonEBook, SIGNAL(clicked()), this, SLOT(addEBookForm()));
+
+	connect(radioButtonBook, SIGNAL(clicked()), this, SLOT(showBookForm()));
+	connect(radioButtonEBook, SIGNAL(clicked()), this, SLOT(showEBookForm()));
 }
 
-void AddItemWindow::addBookForm() {
-	QLabel *authorLabel = new QLabel("Author: ", this);
-	QLineEdit *authorTextField = new QLineEdit(this);
+void AddItemWindow::showBookForm() {
+	eBookFormGroup->hide();
+	bookFormGroup->show();
 
-	QLabel *genreLabel = new QLabel("Genre: ", this);
-	QLineEdit *genreTextField = new QLineEdit(this);
-
-	QFormLayout *bookInfoForm = new QFormLayout();
-	bookInfoForm->addRow(authorLabel, authorTextField);
-	bookInfoForm->addRow(genreLabel, genreTextField);
-
-	QGroupBox *bookFormGroup = new QGroupBox("Book informations", this);
-	bookFormGroup->setLayout(bookInfoForm);
-
-	mainLayout->addWidget(bookFormGroup);
+	adjustSize();
 }
 
-void AddItemWindow::addEBookForm() {}
+void AddItemWindow::showEBookForm() {
+	bookFormGroup->hide();
+	eBookFormGroup->show();
+
+	adjustSize();
+}
 
 void AddItemWindow::newItemSubmitted() {
 	QMessageBox::information(this, "Aggiunto", "Oggetto di libreria");
