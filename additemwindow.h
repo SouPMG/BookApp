@@ -14,6 +14,7 @@ class AddItemWindow : public QDialog {
 
 	private:
 		Ui::AddItemWindow *ui;
+		QVBoxLayout *mainLayout;
 		void setupAddItemForm();
 
 	public:
@@ -22,6 +23,8 @@ class AddItemWindow : public QDialog {
 
 	private slots:
 		void newItemSubmitted();
+		void addBookForm();
+		void addEBookForm();
 
 };
 
