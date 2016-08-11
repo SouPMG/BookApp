@@ -41,6 +41,7 @@ void AddItemWindow::setupAddItemForm() {
 	for (int i = 1900; i < 2020; i++) {
 		yearPublishedField->addItem(QString::number(i));
 	}
+	yearPublishedField->setCurrentText("2000");
 
 	QLabel *ratingLabel = new QLabel("Rating: ", this);
 	QRadioButton *ratingOneStarField = new QRadioButton("1 star", this);
@@ -91,11 +92,50 @@ void AddItemWindow::setupAddItemForm() {
 	QLineEdit *bookAuthorTextField = new QLineEdit(this);
 
 	QLabel *bookGenreLabel = new QLabel("Genre: ", this);
-	QLineEdit *bookGenreTextField = new QLineEdit(this);
+	QComboBox *bookGenreField = new QComboBox(this);
+	bookGenreField->addItem("Drama");
+	bookGenreField->addItem("Classic");
+	bookGenreField->addItem("Comic");
+	bookGenreField->addItem("Crime");
+	bookGenreField->addItem("Fable");
+	bookGenreField->addItem("Fairy tale");
+	bookGenreField->addItem("Fanfiction");
+	bookGenreField->addItem("Fantasy");
+	bookGenreField->addItem("Folklore");
+	bookGenreField->addItem("Hisorical Fiction");
+	bookGenreField->addItem("Horror");
+	bookGenreField->addItem("Humor");
+	bookGenreField->addItem("Legend");
+	bookGenreField->addItem("Magical realism");
+	bookGenreField->addItem("Metafiction");
+	bookGenreField->addItem("Mistery");
+	bookGenreField->addItem("Mithology");
+	bookGenreField->addItem("Realistic fiction");
+	bookGenreField->addItem("Science fiction");
+	bookGenreField->addItem("Short story");
+	bookGenreField->addItem("Thriller");
+	bookGenreField->addItem("Tall tale");
+	bookGenreField->addItem("Western");
+
+	QLabel *bookPagesLabel = new QLabel("Number of pages: ", this);
+	QSpinBox *bookPagesField = new QSpinBox(this);
+	bookPagesField->setMinimum(0);
+	bookPagesField->setMaximum(10000);
+	bookPagesField->setValue(bookPagesField->minimum());
+
+	QLabel *bookReleaseLabel = new QLabel("Release: ", this);
+	QComboBox *bookReleaseField = new QComboBox(this);
+	bookReleaseField->addItem("First");
+	bookReleaseField->addItem("Second");
+	bookReleaseField->addItem("Third");
+	bookReleaseField->addItem("Fourth");
+	bookReleaseField->addItem("Fifth");
 
 	QFormLayout *bookInfoForm = new QFormLayout();
 	bookInfoForm->addRow(bookAuthorLabel, bookAuthorTextField);
-	bookInfoForm->addRow(bookGenreLabel, bookGenreTextField);
+	bookInfoForm->addRow(bookGenreLabel, bookGenreField);
+	bookInfoForm->addRow(bookPagesLabel, bookPagesField);
+	bookInfoForm->addRow(bookReleaseLabel, bookReleaseField);
 
 	bookFormGroup = new QGroupBox("Book informations", this);
 	bookFormGroup->setLayout(bookInfoForm);
@@ -105,28 +145,53 @@ void AddItemWindow::setupAddItemForm() {
 	QLineEdit *eBookAuthorTextField = new QLineEdit(this);
 
 	QLabel *eBookGenreLabel = new QLabel("Genre: ", this);
-	QLineEdit *eBookGenreTextField = new QLineEdit(this);
+	QComboBox *eBookGenreField = new QComboBox(this);
+	eBookGenreField->addItem("Drama");
+	eBookGenreField->addItem("Classic");
+	eBookGenreField->addItem("Comic");
+	eBookGenreField->addItem("Crime");
+	eBookGenreField->addItem("Fable");
+	eBookGenreField->addItem("Fairy tale");
+	eBookGenreField->addItem("Fanfiction");
+	eBookGenreField->addItem("Fantasy");
+	eBookGenreField->addItem("Folklore");
+	eBookGenreField->addItem("Hisorical Fiction");
+	eBookGenreField->addItem("Horror");
+	eBookGenreField->addItem("Humor");
+	eBookGenreField->addItem("Legend");
+	eBookGenreField->addItem("Magical realism");
+	eBookGenreField->addItem("Metafiction");
+	eBookGenreField->addItem("Mistery");
+	eBookGenreField->addItem("Mithology");
+	eBookGenreField->addItem("Realistic fiction");
+	eBookGenreField->addItem("Science fiction");
+	eBookGenreField->addItem("Short story");
+	eBookGenreField->addItem("Thriller");
+	eBookGenreField->addItem("Tall tale");
+	eBookGenreField->addItem("Western");
 
 	QLabel *fileFormatLabel = new QLabel("File format: ", this);
 	QComboBox *fileFormatField = new QComboBox(this);
-	fileFormatField->addItem("*.acsm");
-	fileFormatField->addItem("*.mobi");
-	fileFormatField->addItem("*.epub");
-	fileFormatField->addItem("*.pdf");
+	fileFormatField->addItem(".acsm");
+	fileFormatField->addItem(".mobi");
+	fileFormatField->addItem(".epub");
+	fileFormatField->addItem(".pdf");
 
 	QLabel *fileSizeLabel = new QLabel("File size (MB): ", this);
 	QSpinBox *fileSizeField = new QSpinBox(this);
 	fileSizeField->setMinimum(0);
+	fileSizeField->setMaximum(10000);
 	fileSizeField->setValue(fileSizeField->minimum());
 
 	QLabel *eBookPagesLabel = new QLabel("Number of pages: ", this);
 	QSpinBox *eBookPagesField = new QSpinBox(this);
 	eBookPagesField->setMinimum(0);
+	eBookPagesField->setMaximum(10000);
 	eBookPagesField->setValue(eBookPagesField->minimum());
 
 	QFormLayout *eBookInfoForm = new QFormLayout();
 	eBookInfoForm->addRow(eBookAuthorLabel, eBookAuthorTextField);
-	eBookInfoForm->addRow(eBookGenreLabel, eBookGenreTextField);
+	eBookInfoForm->addRow(eBookGenreLabel, eBookGenreField);
 	eBookInfoForm->addRow(fileFormatLabel, fileFormatField);
 	eBookInfoForm->addRow(fileSizeLabel, fileSizeField);
 	eBookInfoForm->addRow(eBookPagesLabel, eBookPagesField);
@@ -170,6 +235,7 @@ void AddItemWindow::showEBookForm() {
 }
 
 void AddItemWindow::newItemSubmitted() {
-	QMessageBox::information(this, "Aggiunto", "Oggetto di libreria");
+	//QMessageBox::information(this, "Aggiunto", "Oggetto di libreria");
+	
 	close();
 }
