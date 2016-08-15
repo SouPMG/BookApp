@@ -20,8 +20,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	// setup test library //
 	model = new QStringListModel(this);
 
-	library *userLibrary = new library();
-	book *theBook = new book("123456");
+	Library *userLibrary = new Library();
+	Book *theBook = new Book("123456");
 	userLibrary->addItem(theBook);
 
 	QStringList list;

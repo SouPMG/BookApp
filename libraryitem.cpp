@@ -1,58 +1,58 @@
 #include "libraryitem.h"
 
 // Every parameter has a default value except the first one (isbn). For details check libraryitem.h
-libraryItem::libraryItem(QString isbn, QString title, QString publisher, QString cover, unsigned int year, unsigned int rating)
+LibraryItem::LibraryItem(QString isbn, QString title, QString publisher, QString cover, unsigned int year, unsigned int rating)
 	: isbn(isbn), title(title), publisher(publisher), coverImage(cover), yearPublished(year), rating(rating) {}
 
 /* getter methods */
 
-QString libraryItem::getIsbn() const {
+QString LibraryItem::getIsbn() const {
 	return isbn;
 }
 
-QString libraryItem::getTitle() const {
+QString LibraryItem::getTitle() const {
 	return title;
 }
 
-QString libraryItem::getPublisher() const {
+QString LibraryItem::getPublisher() const {
 	return publisher;
 }
 
-QString libraryItem::getCoverImage() const {
+QString LibraryItem::getCoverImage() const {
 	return coverImage;
 }
 
-unsigned int libraryItem::getYearPublished() const {
+unsigned int LibraryItem::getYearPublished() const {
 	return yearPublished;
 }
 
-unsigned int libraryItem::getRating() const {
+unsigned int LibraryItem::getRating() const {
 	return rating;
 }
 
 /* setter methods */
 
-void libraryItem::setTitle(QString newTitle) {
+void LibraryItem::setTitle(QString newTitle) {
 	title = newTitle;
 }
 
-void libraryItem::setPublisher(QString newPublisher) {
+void LibraryItem::setPublisher(QString newPublisher) {
 	publisher = newPublisher;
 }
 
-void libraryItem::setCoverImage(QString newCoverImage) {
+void LibraryItem::setCoverImage(QString newCoverImage) {
 	coverImage = newCoverImage;
 }
 
-void libraryItem::setPublicationYear(unsigned int newYear) {
+void LibraryItem::setPublicationYear(unsigned int newYear) {
 	yearPublished = newYear;
 }
 
-void libraryItem::rate(unsigned int newRating) {
+void LibraryItem::rate(unsigned int newRating) {
 	rating = newRating;
 }
 
 // operators
-bool libraryItem::operator==(const libraryItem& item) const {
+bool LibraryItem::operator==(const LibraryItem& item) const {
 	return getIsbn() == item.getIsbn();
 }

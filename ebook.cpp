@@ -1,62 +1,62 @@
 #include "ebook.h"
 
 // can be instantiated specifying only the isbn, everything else has a default value
-ebook::ebook ( QString isbn, QString title, QString publisher, QString cover, unsigned int year, unsigned int rating,
+eBook::eBook ( QString isbn, QString title, QString publisher, QString cover, unsigned int year, unsigned int rating,
 			   QString author, QString genre, QString format, float size, unsigned int pages )
-	: libraryItem(isbn, title, publisher, cover, year, rating), author(author), genre(genre), format(format), fileSize(size), pages(pages) {}
+	: LibraryItem(isbn, title, publisher, cover, year, rating), author(author), genre(genre), format(format), fileSize(size), pages(pages) {}
 
 // virtual clone method overloaded
-ebook* ebook::clone() const {
-	return new ebook ( *this );
+eBook* eBook::clone() const {
+	return new eBook ( *this );
 }
 
 // getter methods
-QString ebook::getAuthor() const {
+QString eBook::getAuthor() const {
 	return author;
 }
 
-QString ebook::getGenre() const {
+QString eBook::getGenre() const {
 	return genre;
 }
 
-QString ebook::getFormat() const {
+QString eBook::getFormat() const {
 	return format;
 }
 
-float ebook::getFileSize() const {
+float eBook::getFileSize() const {
 	return fileSize;
 }
 
-unsigned int ebook::numberOfPages() const {
+unsigned int eBook::numberOfPages() const {
 	return pages;
 }
 
 // setter methods
-void ebook::setAuthor ( QString newAuthor ) {
+void eBook::setAuthor ( QString newAuthor ) {
 	author = newAuthor;
 }
 
-void ebook::setGenre ( QString newGenre ) {
+void eBook::setGenre ( QString newGenre ) {
 	genre = newGenre;
 }
 
-void ebook::setFormat ( QString newFormat ) {
+void eBook::setFormat ( QString newFormat ) {
 	format = newFormat;
 }
 
-void ebook::setFileSize ( float newFileSize ) {
+void eBook::setFileSize ( float newFileSize ) {
 	fileSize = newFileSize;
 }
 
-void ebook::setPages ( unsigned int numberOfPages ) {
+void eBook::setPages ( unsigned int numberOfPages ) {
 	pages = numberOfPages;
 }
 
 // operators
-bool ebook::operator==(const ebook& b) const {
+bool eBook::operator==(const eBook& b) const {
 	return getIsbn() == b.getIsbn();
 }
 
-ostream& operator<<(ostream& os, const ebook& b) {
+ostream& operator<<(ostream& os, const eBook& b) {
 	return os << "ISBN: " << b.getIsbn() << " Title: " << b.getTitle();
 }

@@ -7,7 +7,7 @@
 
 using std::ostream;
 
-class book : public libraryItem {
+class Book : public LibraryItem {
 	private:
 		QString author;
 		QString genre;
@@ -15,11 +15,11 @@ class book : public libraryItem {
 		unsigned int release;
 	public:
 		// constructor calling libraryItem constructor first
-		book(QString, QString = "undefined", QString = "undefined", QString = "undefined", unsigned int = 1900, unsigned int = 0,
+		Book(QString, QString = "undefined", QString = "undefined", QString = "undefined", unsigned int = 1900, unsigned int = 0,
 			   QString = "undefined", QString = "undefined", unsigned int = 0, unsigned int = 0);
 
 		// implementation of pure virtual methods inherited by libraryItem
-		virtual book* clone() const;
+		virtual Book* clone() const;
 
 		// getter methods
 		QString getAuthor() const;
@@ -34,10 +34,10 @@ class book : public libraryItem {
 		void setReleaseNumber(unsigned int);
 
 		// operators
-		bool operator==(const book&) const;
+		bool operator==(const Book&) const;
 };
 
 // external operators
-ostream& operator<<(ostream&, const book&);
+ostream& operator<<(ostream&, const Book&);
 
 #endif // BOOK_H

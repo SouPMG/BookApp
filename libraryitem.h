@@ -3,7 +3,7 @@
 
 #include <QString>
 
-class libraryItem {
+class LibraryItem {
 	private:
 		QString isbn;
 		QString title;
@@ -13,10 +13,10 @@ class libraryItem {
 		unsigned int rating; // rating: number of stars from 1 to 5
 	public:
 		// constructor
-		libraryItem(QString, QString = "undefined", QString = "undefined", QString = "undefined", unsigned int = 1900, unsigned int = 0);
+		LibraryItem(QString, QString = "undefined", QString = "undefined", QString = "undefined", unsigned int = 1900, unsigned int = 0);
 
 		// pure virtual methods
-		virtual libraryItem* clone() const = 0;
+		virtual LibraryItem* clone() const = 0;
 
 		// setter methods
 		QString getIsbn() const;
@@ -34,7 +34,7 @@ class libraryItem {
 		void rate(unsigned int);
 
 		// operators
-		bool operator==(const libraryItem&) const;
+		bool operator==(const LibraryItem&) const;
 };
 
 #endif // LIBRARYITEM_H
