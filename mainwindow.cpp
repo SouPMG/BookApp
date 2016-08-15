@@ -9,7 +9,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	resize(800, 600);
 
 	// setup mainwindow welcome text
-	ui->mainTextLabel->setText("<h1>Welcome to BookApp!</h1> <p>From here you can add or remove books from your library or edit them from the list.</p>");
+	ui->mainTextLabel->setText
+			("<h1>Welcome to BookApp!</h1> <p>From here you can add or remove books from your library or edit them from the list.</p>");
 	ui->mainTextLabel->setFixedHeight(55);
 
 	// setup library text
@@ -40,6 +41,7 @@ MainWindow::~MainWindow() {
 // actions
 void MainWindow::addItemActionTriggered() {
 	AddItemWindow *addNewItem = new AddItemWindow(this);
+	connect(addNewItem, SIGNAL(itemAdded(LibraryItem*)), this, SLOT(addNewLibraryItem(LibraryItem*)));
 	addNewItem->show();
 }
 
@@ -55,4 +57,10 @@ void MainWindow::connectActions() const {
 	connect(ui->addItemAction,    SIGNAL(triggered()), this, SLOT(addItemActionTriggered()));
 	connect(ui->removeItemAction, SIGNAL(triggered()), this, SLOT(removeItemActionTriggered()));
 	connect(ui->aboutAction,      SIGNAL(triggered()), this, SLOT(aboutActionTriggered()));
+}
+
+void MainWindow::addNewLibraryItem(LibraryItem *newItem) {
+	//eBook *newEBook = dynamic_cast<eBook*>(newItem);
+
+	/* implement library handling */
 }

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtCore>
 #include <QtWidgets>
+#include "libraryitem.h"
 #include "book.h"
 #include "library.h"
 
@@ -29,6 +30,8 @@ class MainWindow : public QMainWindow {
 		void addItemActionTriggered();
 		void removeItemActionTriggered();
 		void aboutActionTriggered();
+
+		void addNewLibraryItem(LibraryItem*);
 };
 
 #endif // MAINWINDOW_H
