@@ -87,35 +87,21 @@ void AddItemWindow::setupAddItemForm() {
 
 	// COMPONENTS SHOWN ONLY IF SELECTED //
 
+	QStringList genres;
+	genres << "Drama" << "Classic" << "Comic" << "Crime" << "Fable" << "Fairy tale" << "Fanfiction" << "Fantasy"
+		   << "Folklore" << "Hisorical Fiction" << "Horror" << "Humor" << "Legend" << "Magical realism" << "Metafiction"
+		   << "Mistery" << "Mithology" << "Realistic fiction" << "Science fiction" << "Short story" << "Thriller"
+		   << "Tall tale" << "Western";
+
 	// create book info form components
 	QLabel *bookAuthorLabel = new QLabel("Author: ", this);
 	QLineEdit *bookAuthorTextField = new QLineEdit(this);
 
 	QLabel *bookGenreLabel = new QLabel("Genre: ", this);
 	QComboBox *bookGenreField = new QComboBox(this);
-	bookGenreField->addItem("Drama");
-	bookGenreField->addItem("Classic");
-	bookGenreField->addItem("Comic");
-	bookGenreField->addItem("Crime");
-	bookGenreField->addItem("Fable");
-	bookGenreField->addItem("Fairy tale");
-	bookGenreField->addItem("Fanfiction");
-	bookGenreField->addItem("Fantasy");
-	bookGenreField->addItem("Folklore");
-	bookGenreField->addItem("Hisorical Fiction");
-	bookGenreField->addItem("Horror");
-	bookGenreField->addItem("Humor");
-	bookGenreField->addItem("Legend");
-	bookGenreField->addItem("Magical realism");
-	bookGenreField->addItem("Metafiction");
-	bookGenreField->addItem("Mistery");
-	bookGenreField->addItem("Mithology");
-	bookGenreField->addItem("Realistic fiction");
-	bookGenreField->addItem("Science fiction");
-	bookGenreField->addItem("Short story");
-	bookGenreField->addItem("Thriller");
-	bookGenreField->addItem("Tall tale");
-	bookGenreField->addItem("Western");
+	foreach (QString genre, genres) {
+		bookGenreField->addItem(genre);
+	}
 
 	QLabel *bookPagesLabel = new QLabel("Number of pages: ", this);
 	QSpinBox *bookPagesField = new QSpinBox(this);
@@ -146,29 +132,9 @@ void AddItemWindow::setupAddItemForm() {
 
 	QLabel *eBookGenreLabel = new QLabel("Genre: ", this);
 	QComboBox *eBookGenreField = new QComboBox(this);
-	eBookGenreField->addItem("Drama");
-	eBookGenreField->addItem("Classic");
-	eBookGenreField->addItem("Comic");
-	eBookGenreField->addItem("Crime");
-	eBookGenreField->addItem("Fable");
-	eBookGenreField->addItem("Fairy tale");
-	eBookGenreField->addItem("Fanfiction");
-	eBookGenreField->addItem("Fantasy");
-	eBookGenreField->addItem("Folklore");
-	eBookGenreField->addItem("Hisorical Fiction");
-	eBookGenreField->addItem("Horror");
-	eBookGenreField->addItem("Humor");
-	eBookGenreField->addItem("Legend");
-	eBookGenreField->addItem("Magical realism");
-	eBookGenreField->addItem("Metafiction");
-	eBookGenreField->addItem("Mistery");
-	eBookGenreField->addItem("Mithology");
-	eBookGenreField->addItem("Realistic fiction");
-	eBookGenreField->addItem("Science fiction");
-	eBookGenreField->addItem("Short story");
-	eBookGenreField->addItem("Thriller");
-	eBookGenreField->addItem("Tall tale");
-	eBookGenreField->addItem("Western");
+	foreach (QString genre, genres) {
+		eBookGenreField->addItem(genre);
+	}
 
 	QLabel *fileFormatLabel = new QLabel("File format: ", this);
 	QComboBox *fileFormatField = new QComboBox(this);
