@@ -26,26 +26,17 @@ void AddItemWindow::setupAddItemForm() {
 	radioButtonEBook = new QRadioButton("E-Book", this);
 	radioButtonBook->setChecked(true);
 
-	isbnLabel = new QLabel("ISBN: ", this);
 	isbnTextField = new QLineEdit(this);
-
-	titleLabel = new QLabel("Title: ", this);
 	titleTextField = new QLineEdit(this);
-
-	publisherLabel = new QLabel("Publisher: ", this);
 	publisherTextField = new QLineEdit(this);
-
-	coverImageLabel = new QLabel("Cover image: ", this);
 	coverImageTextField = new QLineEdit(this);
 
-	yearPublishedLabel = new QLabel("Year published: ", this);
 	yearPublishedField = new QComboBox(this);
 	for (int i = 1900; i < 2020; i++) {
 		yearPublishedField->addItem(QString::number(i));
 	}
 	yearPublishedField->setCurrentText("2000");
 
-	ratingLabel = new QLabel("Rating: ", this);
 	ratingOneStarField = new QRadioButton("1 star", this);
 	ratingTwoStarField = new QRadioButton("2 stars", this);
 	ratingThreeStarField = new QRadioButton("3 stars", this);
@@ -78,12 +69,13 @@ void AddItemWindow::setupAddItemForm() {
 
 	// create form layout for the form members
 	QFormLayout *basicInfoForm = new QFormLayout();
-	basicInfoForm->addRow(isbnLabel, isbnTextField);
-	basicInfoForm->addRow(titleLabel, titleTextField);
-	basicInfoForm->addRow(publisherLabel, publisherTextField);
-	basicInfoForm->addRow(coverImageLabel, coverImageTextField);
-	basicInfoForm->addRow(yearPublishedLabel, yearPublishedField);
-	basicInfoForm->addRow(ratingLabel, ratingLayout);
+	basicInfoForm->addRow("ISBN:", isbnTextField);
+	basicInfoForm->addRow("Title:", titleTextField);
+	basicInfoForm->addRow("Publisher:", publisherTextField);
+	basicInfoForm->addRow("Cover image:", coverImageTextField);
+	basicInfoForm->addRow("Publication year:", yearPublishedField);
+	basicInfoForm->addRow("Rating:", ratingLayout);
+
 	QGroupBox *basicFormGroup = new QGroupBox("Basic informations", this);
 	basicFormGroup->setLayout(basicInfoForm);
 
@@ -97,22 +89,18 @@ void AddItemWindow::setupAddItemForm() {
 		   << "Tall tale" << "Western";
 
 	// create book info form components
-	bookAuthorLabel = new QLabel("Author: ", this);
 	bookAuthorTextField = new QLineEdit(this);
 
-	bookGenreLabel = new QLabel("Genre: ", this);
 	bookGenreField = new QComboBox(this);
 	foreach (QString genre, genres) {
 		bookGenreField->addItem(genre);
 	}
 
-	bookPagesLabel = new QLabel("Number of pages: ", this);
 	bookPagesField = new QSpinBox(this);
 	bookPagesField->setMinimum(0);
 	bookPagesField->setMaximum(10000);
 	bookPagesField->setValue(bookPagesField->minimum());
 
-	bookReleaseLabel = new QLabel("Release: ", this);
 	bookReleaseField = new QComboBox(this);
 	bookReleaseField->addItem("First");
 	bookReleaseField->addItem("Second");
@@ -121,49 +109,44 @@ void AddItemWindow::setupAddItemForm() {
 	bookReleaseField->addItem("Fifth");
 
 	QFormLayout *bookInfoForm = new QFormLayout();
-	bookInfoForm->addRow(bookAuthorLabel, bookAuthorTextField);
-	bookInfoForm->addRow(bookGenreLabel, bookGenreField);
-	bookInfoForm->addRow(bookPagesLabel, bookPagesField);
-	bookInfoForm->addRow(bookReleaseLabel, bookReleaseField);
+	bookInfoForm->addRow("Author:", bookAuthorTextField);
+	bookInfoForm->addRow("Genre:", bookGenreField);
+	bookInfoForm->addRow("Pages:", bookPagesField);
+	bookInfoForm->addRow("Release:", bookReleaseField);
 
 	bookFormGroup = new QGroupBox("Book informations", this);
 	bookFormGroup->setLayout(bookInfoForm);
 
 	// create e-book info form components
-	eBookAuthorLabel = new QLabel("Author: ", this);
 	eBookAuthorTextField = new QLineEdit(this);
 
-	eBookGenreLabel = new QLabel("Genre: ", this);
 	eBookGenreField = new QComboBox(this);
 	foreach (QString genre, genres) {
 		eBookGenreField->addItem(genre);
 	}
 
-	fileFormatLabel = new QLabel("File format: ", this);
 	fileFormatField = new QComboBox(this);
 	fileFormatField->addItem(".acsm");
 	fileFormatField->addItem(".mobi");
 	fileFormatField->addItem(".epub");
 	fileFormatField->addItem(".pdf");
 
-	fileSizeLabel = new QLabel("File size (MB): ", this);
 	fileSizeField = new QSpinBox(this);
 	fileSizeField->setMinimum(0);
 	fileSizeField->setMaximum(10000);
 	fileSizeField->setValue(fileSizeField->minimum());
 
-	eBookPagesLabel = new QLabel("Number of pages: ", this);
 	eBookPagesField = new QSpinBox(this);
 	eBookPagesField->setMinimum(0);
 	eBookPagesField->setMaximum(10000);
 	eBookPagesField->setValue(eBookPagesField->minimum());
 
 	QFormLayout *eBookInfoForm = new QFormLayout();
-	eBookInfoForm->addRow(eBookAuthorLabel, eBookAuthorTextField);
-	eBookInfoForm->addRow(eBookGenreLabel, eBookGenreField);
-	eBookInfoForm->addRow(fileFormatLabel, fileFormatField);
-	eBookInfoForm->addRow(fileSizeLabel, fileSizeField);
-	eBookInfoForm->addRow(eBookPagesLabel, eBookPagesField);
+	eBookInfoForm->addRow("Author:", eBookAuthorTextField);
+	eBookInfoForm->addRow("Genre:", eBookGenreField);
+	eBookInfoForm->addRow("File format:", fileFormatField);
+	eBookInfoForm->addRow("File size (MB):", fileSizeField);
+	eBookInfoForm->addRow("Pages:", eBookPagesField);
 
 	eBookFormGroup = new QGroupBox("E-Book informations", this);
 	eBookFormGroup->setLayout(eBookInfoForm);

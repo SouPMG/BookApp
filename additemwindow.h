@@ -22,22 +22,12 @@ class AddItemWindow : public QDialog {
 		QRadioButton *radioButtonBook;
 		QRadioButton *radioButtonEBook;
 
-		QLabel *isbnLabel;
 		QLineEdit *isbnTextField;
-
-		QLabel *titleLabel;
 		QLineEdit *titleTextField;
-
-		QLabel *publisherLabel;
 		QLineEdit *publisherTextField;
-
-		QLabel *coverImageLabel;
 		QLineEdit *coverImageTextField;
-
-		QLabel *yearPublishedLabel;
 		QComboBox *yearPublishedField;
 
-		QLabel *ratingLabel;
 		QRadioButton *ratingOneStarField;
 		QRadioButton *ratingTwoStarField;
 		QRadioButton *ratingThreeStarField;
@@ -45,32 +35,16 @@ class AddItemWindow : public QDialog {
 		QRadioButton *ratingFiveStarField;
 
 		// book info
-		QLabel *bookAuthorLabel;
 		QLineEdit *bookAuthorTextField;
-
-		QLabel *bookGenreLabel;
 		QComboBox *bookGenreField;
-
-		QLabel *bookPagesLabel;
 		QSpinBox *bookPagesField;
-
-		QLabel *bookReleaseLabel;
 		QComboBox *bookReleaseField;
 
 		// e-book info
-		QLabel *eBookAuthorLabel;
 		QLineEdit *eBookAuthorTextField;
-
-		QLabel *eBookGenreLabel;
 		QComboBox *eBookGenreField;
-
-		QLabel *fileFormatLabel;
 		QComboBox *fileFormatField;
-
-		QLabel *fileSizeLabel;
 		QSpinBox *fileSizeField;
-
-		QLabel *eBookPagesLabel;
 		QSpinBox *eBookPagesField;
 
 		// class widgets to show only when selected
