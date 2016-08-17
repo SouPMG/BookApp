@@ -40,6 +40,7 @@ class MainWindow : public QMainWindow {
 
 		// library handling
 		void addNewLibraryItem(LibraryItem*);
+		void showDetails(QModelIndex);
 };
 
 #endif // MAINWINDOW_H

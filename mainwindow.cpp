@@ -17,10 +17,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	ui->libraryLabel->setText("Your library:");
 
 	connectActions();
+	connect(ui->libraryListView, SIGNAL(clicked(QModelIndex)), this, SLOT(showDetails(QModelIndex)));
 
-	// setup library
-	model = new QStringListModel(this);
+	// setup library variables
 	library = Library();
+	model = new QStringListModel(this);
+	ui->libraryListView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	ui->libraryListView->setModel(model);
 }
 
@@ -85,4 +87,24 @@ void MainWindow::addNewLibraryItem(LibraryItem *newItem) {
 		refreshLibraryModel();
 		return;
 	}
+}
+
+void MainWindow::showDetails(QModelIndex index) {
+	//QMessageBox::information(this, "Title", index.data().toString());
+	ui->mainTextLabel->hide();
+
+	QLabel *titleData = new QLabel(index.data().toString());
+
+	QFormLayout *detailsLayout = new QFormLayout();
+	detailsLayout->addRow("Title:", titleData);
+	titleData->setText("ho");
+
+	QHBoxLayout *mainLayout = new QHBoxLayout();
+	mainLayout->addWidget(ui->libraryListView);
+	mainLayout->addLayout(detailsLayout);
+	mainLayout->addSpacing(300);
+
+	QWidget *details = new QWidget();
+	details->setLayout(mainLayout);
+	setCentralWidget(details);
 }
