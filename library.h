@@ -40,7 +40,6 @@ class Library {
 		int size() const;
 		LibraryItem* at(int) const; // get library item at a given index
 		void addItem(LibraryItem*);
-		//void addItemAt(int, LibraryItem*);
 		void removeItem(LibraryItem*);
 		LibraryItem* extract();
 
