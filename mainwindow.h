@@ -4,9 +4,10 @@
 #include <QMainWindow>
 #include <QtCore>
 #include <QtWidgets>
+#include "library.h"
 #include "libraryitem.h"
 #include "book.h"
-#include "library.h"
+#include "ebook.h"
 
 namespace Ui {
 	class MainWindow;
@@ -16,10 +17,16 @@ class MainWindow : public QMainWindow {
 		Q_OBJECT
 
 	private:
+		// ui manager
 		Ui::MainWindow *ui;
+
+		// private fields
+		Library library;
 		QStringListModel *model;
 
+		// private utility methods
 		void connectActions() const;
+		void refreshLibraryModel() const;
 
 	public:
 		explicit MainWindow(QWidget *parent = 0);
@@ -31,6 +38,7 @@ class MainWindow : public QMainWindow {
 		void removeItemActionTriggered();
 		void aboutActionTriggered();
 
+		// library handling
 		void addNewLibraryItem(LibraryItem*);
 };
 

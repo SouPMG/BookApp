@@ -18,27 +18,32 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 	connectActions();
 
-	// setup test library //
+	// setup library
 	model = new QStringListModel(this);
-
-	Library *userLibrary = new Library();
-	Book *theBook = new Book("123456");
-	userLibrary->addItem(theBook);
-
-	QStringList list;
-	list << userLibrary->extract()->getTitle();
-
-	model->setStringList(list);
-
+	library = Library();
 	ui->libraryListView->setModel(model);
-	// /setup test library //
 }
 
 MainWindow::~MainWindow() {
 	delete ui;
 }
 
-// actions
+// utility methods
+void MainWindow::connectActions() const {
+	connect(ui->addItemAction,    SIGNAL(triggered()), this, SLOT(addItemActionTriggered()));
+	connect(ui->removeItemAction, SIGNAL(triggered()), this, SLOT(removeItemActionTriggered()));
+	connect(ui->aboutAction,      SIGNAL(triggered()), this, SLOT(aboutActionTriggered()));
+}
+
+void MainWindow::refreshLibraryModel() const {
+	QStringList list;
+	for (Library::LibraryIterator it = library.begin(); it != library.end(); it++) {
+		list << library[it]->getTitle();
+	}
+	model->setStringList(list);
+}
+
+// slots
 void MainWindow::addItemActionTriggered() {
 	AddItemWindow *addNewItem = new AddItemWindow(this);
 	connect(addNewItem, SIGNAL(itemAdded(LibraryItem*)), this, SLOT(addNewLibraryItem(LibraryItem*)));
@@ -46,21 +51,38 @@ void MainWindow::addItemActionTriggered() {
 }
 
 void MainWindow::removeItemActionTriggered() {
-	model->removeRows(ui->libraryListView->currentIndex().row(), 1);
+	int position = ui->libraryListView->currentIndex().row();
+	Library::LibraryIterator it = library.begin();
+
+	for (int i; i < position; i++) {
+		it++;
+	}
+
+	library.removeItem(library[it]);
+
+	// remove item from model
+	model->removeRows(position, 1);
 }
 
 void MainWindow::aboutActionTriggered() {
 	QMessageBox::information(this, "About", "BookApp® 2016 <br/> Mattia Giacobbe");
 }
 
-void MainWindow::connectActions() const {
-	connect(ui->addItemAction,    SIGNAL(triggered()), this, SLOT(addItemActionTriggered()));
-	connect(ui->removeItemAction, SIGNAL(triggered()), this, SLOT(removeItemActionTriggered()));
-	connect(ui->aboutAction,      SIGNAL(triggered()), this, SLOT(aboutActionTriggered()));
-}
-
 void MainWindow::addNewLibraryItem(LibraryItem *newItem) {
-	//eBook *newEBook = dynamic_cast<eBook*>(newItem);
-
-	/* implement library handling */
+	// here we have a new object that needs to be added to the library
+	// firstly we identify what type of object we have
+	Book *newBook = dynamic_cast<Book*>(newItem);
+	if (newBook) {
+		// we have a book
+		library.addItem(newBook);
+		refreshLibraryModel();
+		return;
+	}
+	eBook *newEBook = dynamic_cast<eBook*>(newItem);
+	if (newEBook) {
+		// we have an e-book
+		library.addItem(newEBook);
+		refreshLibraryModel();
+		return;
+	}
 }
