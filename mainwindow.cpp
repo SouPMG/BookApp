@@ -9,9 +9,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	resize(800, 600);
 
 	// setup mainwindow welcome text
-	ui->mainTextLabel->setText
-			("<h1>Welcome to BookApp!</h1> <p>From here you can add or remove books from your library or edit them from the list.</p>");
-	ui->mainTextLabel->setFixedHeight(55);
+	ui->mainTextLabel->setText("<h1>Welcome to BookApp!</h1>"
+							   "<p>From here you can add or remove books from your library or edit them from the list.</p>");
+	ui->mainTextLabel->adjustSize();
 
 	// setup library text
 	ui->libraryLabel->setText("Your library:");
@@ -21,7 +21,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 	// setup library variables
 	library = Library();
+
+	/**/Book *tempBook = new Book("12345", "Trial Book", "Myself", "/etc/opt/fuck", 1993, 5);
+	/**/library.addItem(tempBook);
+
 	model = new QStringListModel(this);
+
+	/**/QStringList tempList;
+	/**/tempList << tempBook->getTitle();
+	/**/model->setStringList(tempList);
+
 	ui->libraryListView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	ui->libraryListView->setModel(model);
 }
@@ -46,6 +55,10 @@ void MainWindow::refreshLibraryModel() const {
 }
 
 // slots
+void MainWindow::aboutActionTriggered() {
+	QMessageBox::information(this, "About", "BookApp® 2016 <br/> Mattia Giacobbe");
+}
+
 void MainWindow::addItemActionTriggered() {
 	AddItemWindow *addNewItem = new AddItemWindow(this);
 	connect(addNewItem, SIGNAL(itemAdded(LibraryItem*)), this, SLOT(addNewLibraryItem(LibraryItem*)));
@@ -54,20 +67,26 @@ void MainWindow::addItemActionTriggered() {
 
 void MainWindow::removeItemActionTriggered() {
 	int position = ui->libraryListView->currentIndex().row();
-	Library::LibraryIterator it = library.begin();
+	QMessageBox::StandardButton reply;
 
-	for (int i; i < position; i++) {
-		it++;
+	if (position >= 0) {
+		reply = QMessageBox::question(this, "Delete item", "Are you sure you want to delete this item?", QMessageBox::Yes | QMessageBox::No);
+		if (reply == QMessageBox::Yes) {
+			Library::LibraryIterator it = library.begin();
+			for (int i; i < position; i++) {
+				it++;
+			}
+
+			// remove item from container
+			library.removeItem(library[it]);
+
+			// remove item from model
+			model->removeRows(position, 1);
+
+			// switch to welcome text on stacked widget
+			ui->mainContent->setCurrentIndex(0);
+		}
 	}
-
-	library.removeItem(library[it]);
-
-	// remove item from model
-	model->removeRows(position, 1);
-}
-
-void MainWindow::aboutActionTriggered() {
-	QMessageBox::information(this, "About", "BookApp® 2016 <br/> Mattia Giacobbe");
 }
 
 void MainWindow::addNewLibraryItem(LibraryItem *newItem) {
@@ -90,21 +109,28 @@ void MainWindow::addNewLibraryItem(LibraryItem *newItem) {
 }
 
 void MainWindow::showDetails(QModelIndex index) {
-	//QMessageBox::information(this, "Title", index.data().toString());
-	ui->mainTextLabel->hide();
+	int position = index.row();
+	LibraryItem *selectedItemGeneric = library.at(position);
 
-	QLabel *titleData = new QLabel(index.data().toString());
+	ui->isbnDataLabel->setText(selectedItemGeneric->getIsbn());
+	ui->titleDataLabel->setText(selectedItemGeneric->getTitle());
+	ui->publisherDataLabel->setText(selectedItemGeneric->getPublisher());
+	ui->yearDataLabel->setText(QString::number(selectedItemGeneric->getYearPublished()));
+	ui->ratingDataLabel->setText(QString::number(selectedItemGeneric->getRating()));
 
-	QFormLayout *detailsLayout = new QFormLayout();
-	detailsLayout->addRow("Title:", titleData);
-	titleData->setText("ho");
+	// again, let's see what kind of item we have
+	Book *selectedItemBook = dynamic_cast<Book*>(selectedItemGeneric);
+	if (selectedItemBook) {
+		// we have a book so we add additional book info
+		ui->titleLabel->hide();
+		ui->titleDataLabel->hide();
+	}
+	eBook *selectedItemEBook = dynamic_cast<eBook*>(selectedItemGeneric);
+	if (selectedItemEBook) {
+		// we have an e-book so we add additional e-book info
 
-	QHBoxLayout *mainLayout = new QHBoxLayout();
-	mainLayout->addWidget(ui->libraryListView);
-	mainLayout->addLayout(detailsLayout);
-	mainLayout->addSpacing(300);
+	}
 
-	QWidget *details = new QWidget();
-	details->setLayout(mainLayout);
-	setCentralWidget(details);
+	// switch to stack widget item data view side
+	ui->mainContent->setCurrentIndex(1);
 }
