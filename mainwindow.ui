@@ -47,7 +47,7 @@
       <item>
        <widget class="QStackedWidget" name="mainContent">
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="welcomeText">
          <widget class="QLabel" name="mainTextLabel">
@@ -112,18 +112,12 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="1">
-                  <widget class="QLineEdit" name="isbnData"/>
-                 </item>
                  <item row="1" column="0">
                   <widget class="QLabel" name="titleLabel">
                    <property name="text">
                     <string>Title:</string>
                    </property>
                   </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QLineEdit" name="titleData"/>
                  </item>
                  <item row="2" column="0">
                   <widget class="QLabel" name="publisherLabel">
@@ -132,18 +126,12 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1">
-                  <widget class="QLineEdit" name="publisherData"/>
-                 </item>
                  <item row="3" column="0">
                   <widget class="QLabel" name="yearLabel">
                    <property name="text">
                     <string>Year:</string>
                    </property>
                   </widget>
-                 </item>
-                 <item row="3" column="1">
-                  <widget class="QLineEdit" name="yearData"/>
                  </item>
                  <item row="4" column="0">
                   <widget class="QLabel" name="ratingLabel">
@@ -152,14 +140,44 @@
                    </property>
                   </widget>
                  </item>
+                 <item row="0" column="1">
+                  <widget class="QLabel" name="isbnData">
+                   <property name="text">
+                    <string>TextLabel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLabel" name="titleData">
+                   <property name="text">
+                    <string>TextLabel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QLabel" name="publisherData">
+                   <property name="text">
+                    <string>TextLabel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QLabel" name="yearData">
+                   <property name="text">
+                    <string>TextLabel</string>
+                   </property>
+                  </widget>
+                 </item>
                  <item row="4" column="1">
-                  <widget class="QLineEdit" name="ratingData"/>
+                  <widget class="QLabel" name="ratingData">
+                   <property name="text">
+                    <string>TextLabel</string>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </item>
               </layout>
-              <zorder></zorder>
-              <zorder></zorder>
              </widget>
             </item>
             <item>
@@ -177,18 +195,12 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="1">
-                  <widget class="QLineEdit" name="bookAuthorData"/>
-                 </item>
                  <item row="1" column="0">
                   <widget class="QLabel" name="bookGenreLabel">
                    <property name="text">
                     <string>Genre:</string>
                    </property>
                   </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QLineEdit" name="bookGenreData"/>
                  </item>
                  <item row="2" column="0">
                   <widget class="QLabel" name="bookPagesLabel">
@@ -197,9 +209,6 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1">
-                  <widget class="QLineEdit" name="bookPagesData"/>
-                 </item>
                  <item row="3" column="0">
                   <widget class="QLabel" name="bookReleaseLabel">
                    <property name="text">
@@ -207,8 +216,33 @@
                    </property>
                   </widget>
                  </item>
+                 <item row="0" column="1">
+                  <widget class="QLabel" name="bookAuthorData">
+                   <property name="text">
+                    <string>TextLabel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLabel" name="bookGenreData">
+                   <property name="text">
+                    <string>TextLabel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QLabel" name="bookPagesData">
+                   <property name="text">
+                    <string>TextLabel</string>
+                   </property>
+                  </widget>
+                 </item>
                  <item row="3" column="1">
-                  <widget class="QLineEdit" name="bookReleaseData"/>
+                  <widget class="QLabel" name="bookReleaseData">
+                   <property name="text">
+                    <string>TextLabel</string>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </item>
@@ -230,18 +264,12 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="1">
-                  <widget class="QLineEdit" name="eBookAuthorData"/>
-                 </item>
                  <item row="1" column="0">
                   <widget class="QLabel" name="eBookGenreLabel">
                    <property name="text">
                     <string>Genre:</string>
                    </property>
                   </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QLineEdit" name="eBookGenreData"/>
                  </item>
                  <item row="2" column="0">
                   <widget class="QLabel" name="eBookFormatLabel">
@@ -250,18 +278,12 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1">
-                  <widget class="QLineEdit" name="eBookFormatData"/>
-                 </item>
                  <item row="3" column="0">
                   <widget class="QLabel" name="eBookSizeLabel">
                    <property name="text">
                     <string>Size (MB):</string>
                    </property>
                   </widget>
-                 </item>
-                 <item row="3" column="1">
-                  <widget class="QLineEdit" name="eBookSizeData"/>
                  </item>
                  <item row="4" column="0">
                   <widget class="QLabel" name="eBookPagesLabel">
@@ -270,8 +292,40 @@
                    </property>
                   </widget>
                  </item>
+                 <item row="0" column="1">
+                  <widget class="QLabel" name="eBookAuthorData">
+                   <property name="text">
+                    <string>TextLabel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLabel" name="eBookGenreData">
+                   <property name="text">
+                    <string>TextLabel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QLabel" name="eBookFormatData">
+                   <property name="text">
+                    <string>TextLabel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QLabel" name="eBookSizeData">
+                   <property name="text">
+                    <string>TextLabel</string>
+                   </property>
+                  </widget>
+                 </item>
                  <item row="4" column="1">
-                  <widget class="QLineEdit" name="eBookPagesData"/>
+                  <widget class="QLabel" name="eBookPagesData">
+                   <property name="text">
+                    <string>TextLabel</string>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </item>
