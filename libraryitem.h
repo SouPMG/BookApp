@@ -26,6 +26,7 @@ class LibraryItem {
 		QString getCoverImage() const;
 		unsigned int getYearPublished() const;
 		unsigned int getRating() const;
+        float getTimeRead() const;
 
         // setter methods
 		void setTitle(QString);
@@ -33,6 +34,10 @@ class LibraryItem {
 		void setCoverImage(QString);
 		void setPublicationYear(unsigned int);
 		void rate(unsigned int);
+        void setTimeRead(float);
+
+        // other methods
+        void addTimeRead(float);
 
 		// operators
 		bool operator==(const LibraryItem&) const;

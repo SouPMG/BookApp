@@ -1,11 +1,10 @@
 #include "libraryitem.h"
 
 // Every parameter has a default value except the first one (isbn). For details check libraryitem.h
-LibraryItem::LibraryItem(QString isbn, QString title, QString publisher, QString cover, unsigned int year, unsigned int rating)
-	: isbn(isbn), title(title), publisher(publisher), coverImage(cover), yearPublished(year), rating(rating) {}
+LibraryItem::LibraryItem(QString isbn, QString title, QString publisher, QString cover, unsigned int year, unsigned int rating, float time)
+    : isbn(isbn), title(title), publisher(publisher), coverImage(cover), yearPublished(year), rating(rating), timeRead(time) {}
 
-/* getter methods */
-
+// getter methods
 QString LibraryItem::getIsbn() const {
 	return isbn;
 }
@@ -30,8 +29,11 @@ unsigned int LibraryItem::getRating() const {
 	return rating;
 }
 
-/* setter methods */
+float LibraryItem::getTimeRead() const {
+    return timeRead;
+}
 
+// setter methods
 void LibraryItem::setTitle(QString newTitle) {
 	title = newTitle;
 }
@@ -50,6 +52,15 @@ void LibraryItem::setPublicationYear(unsigned int newYear) {
 
 void LibraryItem::rate(unsigned int newRating) {
 	rating = newRating;
+}
+
+void LibraryItem::setTimeRead(float newTimeRead) {
+    timeRead = newTimeRead;
+}
+
+// other methods
+void LibraryItem::addTimeRead(float timeToAdd) {
+    timeRead += timeToAdd;
 }
 
 // operators

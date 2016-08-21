@@ -240,7 +240,7 @@ void AddItemWindow::newItemSubmitted() {
 		unsigned int itemPages = bookPagesField->value();
 		unsigned int itemRelease = getCurrentRelease();
 
-		newItem = new Book(itemISBN, itemTitle, itemPublisher, itemCoverImage, itemYearPublished, itemRating, itemAuthor, itemGenre, itemPages, itemRelease);
+        newItem = new Book(itemISBN, itemTitle, itemPublisher, itemCoverImage, itemYearPublished, itemRating, 0, itemAuthor, itemGenre, itemPages, itemRelease);
 	} else if (radioButtonEBook->isChecked()) {
 		QString itemAuthor = eBookAuthorTextField->text();
 		QString itemGenre = eBookGenreField->currentText();
@@ -248,7 +248,7 @@ void AddItemWindow::newItemSubmitted() {
 		float itemSize = fileSizeField->value();
 		unsigned int itemPages = eBookPagesField->value();
 
-		newItem = new eBook(itemISBN, itemTitle, itemPublisher, itemCoverImage, itemYearPublished, itemRating, itemAuthor, itemGenre, itemFormat, itemSize, itemPages);
+        newItem = new eBook(itemISBN, itemTitle, itemPublisher, itemCoverImage, itemYearPublished, itemRating, 0, itemAuthor, itemGenre, itemFormat, itemSize, itemPages);
 	} else {
 		// if everything fails build a default book with given mandatory ISBN
 		newItem = new Book(itemISBN);

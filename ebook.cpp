@@ -1,9 +1,9 @@
 #include "ebook.h"
 
 // can be instantiated specifying only the isbn, everything else has a default value
-eBook::eBook ( QString isbn, QString title, QString publisher, QString cover, unsigned int year, unsigned int rating,
-			   QString author, QString genre, QString format, float size, unsigned int pages )
-	: LibraryItem(isbn, title, publisher, cover, year, rating), author(author), genre(genre), format(format), fileSize(size), pages(pages) {}
+eBook::eBook(QString isbn, QString title, QString publisher, QString cover, unsigned int year, unsigned int rating, float time,
+               QString author, QString genre, QString format, float size, unsigned int pages)
+    : LibraryItem(isbn, title, publisher, cover, year, rating, time), author(author), genre(genre), format(format), fileSize(size), pages(pages) {}
 
 // virtual clone method overloaded
 eBook* eBook::clone() const {
