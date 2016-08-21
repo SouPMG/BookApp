@@ -110,48 +110,37 @@ void MainWindow::addNewLibraryItem(LibraryItem *newItem) {
 
 void MainWindow::showDetails(QModelIndex index) {
 	int position = index.row();
-	LibraryItem *selectedItemGeneric = library.at(position);
+    LibraryItem *selectedItemGeneric = library.at(position);
 
-	ui->isbnData->setText(selectedItemGeneric->getIsbn());
-	ui->titleData->setText(selectedItemGeneric->getTitle());
-	ui->publisherData->setText(selectedItemGeneric->getPublisher());
-	ui->yearData->setText(QString::number(selectedItemGeneric->getYearPublished()));
-	ui->ratingData->setText(QString::number(selectedItemGeneric->getRating()));
+    ui->isbnData->setText(selectedItemGeneric->getIsbn());
+    ui->titleData->setText(selectedItemGeneric->getTitle());
+    ui->publisherData->setText(selectedItemGeneric->getPublisher());
+    ui->yearData->setText(QString::number(selectedItemGeneric->getYearPublished()));
+    ui->ratingData->setText(QString::number(selectedItemGeneric->getRating()));
 
 	// again, let's see what kind of item we have
 	Book *selectedItemBook = dynamic_cast<Book*>(selectedItemGeneric);
 	if (selectedItemBook) {
-		// we have a book so we add additional book info
-		QLineEdit *bookAuthorData = new QLineEdit(selectedItemBook->getAuthor());
-		QLineEdit *bookGenreData = new QLineEdit(selectedItemBook->getGenre());
-		QLineEdit *bookPagesData = new QLineEdit(QString::number(selectedItemBook->numberOfPages()));
-		QLineEdit *bookReleaseData = new QLineEdit(QString::number(selectedItemBook->getReleaseNumber()));
+        // we have a book so we add additional book info
+        ui->bookAuthorData->setText(selectedItemBook->getAuthor());
+        ui->bookGenreData->setText(selectedItemBook->getGenre());
+        ui->bookPagesData->setText(QString::number(selectedItemBook->numberOfPages()));
+        ui->bookReleaseData->setText(QString::number(selectedItemBook->getReleaseNumber()));
 
-		QLabel *bookInfoLabel = new QLabel("Book specific informations");
-		ui->dataFormLayout->addWidget(bookInfoLabel);
-
-		ui->dataFormLayout->addRow("Author:", bookAuthorData);
-		ui->dataFormLayout->addRow("Genre:", bookGenreData);
-		ui->dataFormLayout->addRow("Pages:", bookPagesData);
-		ui->dataFormLayout->addRow("Release:", bookReleaseData);
+        ui->eBookInfoGroup->hide();
+        ui->bookInfoGroup->show();
 	}
 	eBook *selectedItemEBook = dynamic_cast<eBook*>(selectedItemGeneric);
 	if (selectedItemEBook) {
-		// we have an e-book so we add additional e-book info
-		QLineEdit *eBookAuthorData = new QLineEdit(selectedItemEBook->getAuthor());
-		QLineEdit *eBookGenreData = new QLineEdit(selectedItemEBook->getGenre());
-		QLineEdit *eBookFormatData = new QLineEdit(selectedItemEBook->getFormat());
-		QLineEdit *eBookSizeData = new QLineEdit(QString::number(selectedItemEBook->getFileSize()));
-		QLineEdit *eBookPagesData = new QLineEdit(QString::number(selectedItemEBook->numberOfPages()));
+        // we have an e-book so we add additional e-book info
+        ui->eBookAuthorData->setText(selectedItemEBook->getAuthor());
+        ui->eBookGenreData->setText(selectedItemEBook->getGenre());
+        ui->eBookFormatData->setText(selectedItemEBook->getFormat());
+        ui->eBookSizeData->setText(QString::number(selectedItemEBook->getFileSize()));
+        ui->eBookPagesData->setText(QString::number(selectedItemEBook->numberOfPages()));
 
-		QLabel *eBookInfoLabel = new QLabel("e-Book specific informations");
-		ui->dataFormLayout->addWidget(eBookInfoLabel);
-
-		ui->dataFormLayout->addRow("Author:", eBookAuthorData);
-		ui->dataFormLayout->addRow("Genre:", eBookGenreData);
-		ui->dataFormLayout->addRow("File format:", eBookFormatData);
-		ui->dataFormLayout->addRow("File size (MB):", eBookSizeData);
-		ui->dataFormLayout->addRow("Pages:", eBookPagesData);
+        ui->bookInfoGroup->hide();
+        ui->eBookInfoGroup->show();
 	}
 
 	// switch to stack widget item data view side

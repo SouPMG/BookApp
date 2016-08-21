@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>875</width>
-    <height>512</height>
+    <width>904</width>
+    <height>918</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -65,9 +65,9 @@
          </widget>
         </widget>
         <widget class="QWidget" name="itemData">
-         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout">
+           <layout class="QVBoxLayout" name="itemDataLayout">
             <item>
              <widget class="QLabel" name="detailsLabel">
               <property name="sizePolicy">
@@ -89,96 +89,213 @@
              </widget>
             </item>
             <item>
-             <layout class="QFormLayout" name="dataFormLayout">
-              <property name="verticalSpacing">
-               <number>6</number>
+             <widget class="QGroupBox" name="genericInfoGroup">
+              <property name="title">
+               <string>Generic item informations</string>
               </property>
-              <property name="bottomMargin">
-               <number>23</number>
+              <property name="alignment">
+               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
               </property>
-              <item row="1" column="0">
-               <widget class="QLabel" name="isbnLabel">
-                <property name="text">
-                 <string>ISBN:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QLineEdit" name="isbnData"/>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="titleLabel">
-                <property name="text">
-                 <string>Title:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QLineEdit" name="titleData"/>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="publisherLabel">
-                <property name="text">
-                 <string>Publisher:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QLineEdit" name="publisherData"/>
-              </item>
-              <item row="4" column="0">
-               <widget class="QLabel" name="yearLabel">
-                <property name="text">
-                 <string>Year:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QLineEdit" name="yearData"/>
-              </item>
-              <item row="5" column="0">
-               <widget class="QLabel" name="ratingLabel">
-                <property name="text">
-                 <string>Rating:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="1">
-               <widget class="QLineEdit" name="ratingData"/>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLabel" name="label">
-                <property name="text">
-                 <string>General informations</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
+              <property name="flat">
+               <bool>false</bool>
+              </property>
+              <property name="checkable">
+               <bool>false</bool>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <item>
+                <layout class="QFormLayout" name="genericInfoFormLayout">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="isbnLabel">
+                   <property name="text">
+                    <string>ISBN:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLineEdit" name="isbnData"/>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="titleLabel">
+                   <property name="text">
+                    <string>Title:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLineEdit" name="titleData"/>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="publisherLabel">
+                   <property name="text">
+                    <string>Publisher:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QLineEdit" name="publisherData"/>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="yearLabel">
+                   <property name="text">
+                    <string>Year:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QLineEdit" name="yearData"/>
+                 </item>
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="ratingLabel">
+                   <property name="text">
+                    <string>Rating:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1">
+                  <widget class="QLineEdit" name="ratingData"/>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+              <zorder></zorder>
+              <zorder></zorder>
+             </widget>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout">
+             <widget class="QGroupBox" name="bookInfoGroup">
+              <property name="title">
+               <string>Book informations</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_3">
+               <item>
+                <layout class="QFormLayout" name="bookInfoFormLayout">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="bookAuthorLabel">
+                   <property name="text">
+                    <string>Author:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLineEdit" name="bookAuthorData"/>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="bookGenreLabel">
+                   <property name="text">
+                    <string>Genre:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLineEdit" name="bookGenreData"/>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="bookPagesLabel">
+                   <property name="text">
+                    <string>Pages:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QLineEdit" name="bookPagesData"/>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="bookReleaseLabel">
+                   <property name="text">
+                    <string>Release:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QLineEdit" name="bookReleaseData"/>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="eBookInfoGroup">
+              <property name="title">
+               <string>E-Book informations</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout">
+               <item>
+                <layout class="QFormLayout" name="formLayout">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="eBookAuthorLabel">
+                   <property name="text">
+                    <string>Author:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLineEdit" name="eBookAuthorData"/>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="eBookGenreLabel">
+                   <property name="text">
+                    <string>Genre:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLineEdit" name="eBookGenreData"/>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="eBookFormatLabel">
+                   <property name="text">
+                    <string>Format:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QLineEdit" name="eBookFormatData"/>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="eBookSizeLabel">
+                   <property name="text">
+                    <string>Size (MB):</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QLineEdit" name="eBookSizeData"/>
+                 </item>
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="eBookPagesLabel">
+                   <property name="text">
+                    <string>Pages:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1">
+                  <widget class="QLineEdit" name="eBookPagesData"/>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="buttonsLayout">
               <item>
                <widget class="QPushButton" name="editItemButton">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
                 <property name="text">
                  <string>Edit</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="removeItemButtonButton">
+               <widget class="QPushButton" name="startReadingButton">
                 <property name="text">
-                 <string>Delete</string>
+                 <string>Start Reading!</string>
                 </property>
                </widget>
               </item>
               <item>
-               <spacer name="horizontalSpacer">
+               <spacer name="buttonSpacer">
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
                 </property>
@@ -207,13 +324,13 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>875</width>
-     <height>21</height>
+     <width>904</width>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuBook">
     <property name="title">
-     <string>Book</string>
+     <string>Boo&amp;k</string>
     </property>
     <addaction name="addItemAction"/>
     <addaction name="removeItemAction"/>
@@ -240,7 +357,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="addItemAction">
    <property name="text">
-    <string>Add Item</string>
+    <string>&amp;Add Item</string>
    </property>
    <property name="toolTip">
     <string>Add a library item</string>
@@ -248,7 +365,7 @@
   </action>
   <action name="removeItemAction">
    <property name="text">
-    <string>Remove Item</string>
+    <string>&amp;Remove Item</string>
    </property>
    <property name="toolTip">
     <string>Remove a library item</string>
@@ -256,7 +373,7 @@
   </action>
   <action name="aboutAction">
    <property name="text">
-    <string>About BookApp</string>
+    <string>&amp;About BookApp</string>
    </property>
   </action>
  </widget>
