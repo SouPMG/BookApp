@@ -18,17 +18,20 @@ SOURCES += main.cpp\
     book.cpp \
     ebook.cpp \
     library.cpp \
-    additemwindow.cpp
+    additemwindow.cpp \
+    edititemwindow.cpp
 
 HEADERS  += mainwindow.h \
     libraryitem.h \
     book.h \
     ebook.h \
     library.h \
-    additemwindow.h
+    additemwindow.h \
+    edititemwindow.h
 
 FORMS    += mainwindow.ui \
-    additemwindow.ui
+    additemwindow.ui \
+    edititemwindow.ui
 
 RESOURCES += \
     library.qrc
