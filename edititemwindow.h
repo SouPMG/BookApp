@@ -2,6 +2,9 @@
 #define EDITITEMWINDOW_H
 
 #include <QDialog>
+#include <QtCore>
+#include <QtWidgets>
+#include "libraryitem.h"
 
 namespace Ui {
     class EditItemWindow;
@@ -13,8 +16,10 @@ class EditItemWindow : public QDialog {
     private:
         Ui::EditItemWindow *ui;
 
+        void setUpEditForm(LibraryItem*);
+
     public:
-        explicit EditItemWindow(QWidget *parent = 0);
+        explicit EditItemWindow(LibraryItem *item, QWidget *parent = 0);
         ~EditItemWindow();
 
 };

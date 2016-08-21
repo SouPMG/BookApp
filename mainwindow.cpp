@@ -1,6 +1,7 @@
 #include "mainwindow.h"
-#include "additemwindow.h"
 #include "ui_mainwindow.h"
+#include "additemwindow.h"
+#include "edititemwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
 	ui->setupUi(this);
@@ -17,7 +18,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	ui->libraryLabel->setText("Your library:");
 
 	connectActions();
-	connect(ui->libraryListView, SIGNAL(clicked(QModelIndex)), this, SLOT(showDetails(QModelIndex)));
+    connect(ui->libraryListView, SIGNAL(clicked(QModelIndex)), this, SLOT(showDetails(QModelIndex)));
+
+    // connect edit button clicked signal to mainwindow slot that will re-emit custom clicked signal with proper parameters
+    connect(ui->editItemButton, SIGNAL(clicked(bool)), this, SLOT(emitEditButtonClicked(bool)));
+    connect(this, SIGNAL(editButtonClicked(LibraryItem*)), this, SLOT(editItemTriggered(LibraryItem*)));
 
 	// setup library variables
 	library = Library();
@@ -32,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	/**/model->setStringList(tempList);
 
 	ui->libraryListView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->libraryListView->setSelectionMode(QAbstractItemView::SingleSelection);
 	ui->libraryListView->setModel(model);
 }
 
@@ -145,4 +151,18 @@ void MainWindow::showDetails(QModelIndex index) {
 
 	// switch to stack widget item data view side
 	ui->mainContent->setCurrentIndex(1);
+}
+
+// edit button slots
+void MainWindow::emitEditButtonClicked(bool) {
+    QModelIndex index = ui->libraryListView->currentIndex();
+    int position = index.row();
+    LibraryItem *selectedItem = library.at(position);
+
+    emit editButtonClicked(selectedItem);
+}
+
+void MainWindow::editItemTriggered(LibraryItem *itemToEdit) {
+    EditItemWindow *editWindow = new EditItemWindow(itemToEdit);
+    editWindow->show();
 }

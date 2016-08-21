@@ -32,6 +32,9 @@ class MainWindow : public QMainWindow {
 		explicit MainWindow(QWidget *parent = 0);
 		~MainWindow();
 
+    signals:
+        void editButtonClicked(LibraryItem*);
+
 	private slots:
 		// actions
 		void addItemActionTriggered();
@@ -41,6 +44,10 @@ class MainWindow : public QMainWindow {
 		// library handling
 		void addNewLibraryItem(LibraryItem*);
 		void showDetails(QModelIndex);
+
+        // edit item slots
+        void emitEditButtonClicked(bool);
+        void editItemTriggered(LibraryItem*);
 };
 
 #endif // MAINWINDOW_H
