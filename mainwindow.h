@@ -48,6 +48,7 @@ class MainWindow : public QMainWindow {
         // edit item slots
         void emitEditButtonClicked(bool);
         void editItemTriggered(LibraryItem*);
+		void editLibraryItem(LibraryItem*);
 };
 
 #endif // MAINWINDOW_H

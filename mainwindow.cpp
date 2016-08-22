@@ -165,5 +165,10 @@ void MainWindow::emitEditButtonClicked(bool) {
 
 void MainWindow::editItemTriggered(LibraryItem *itemToEdit) {
     EditItemWindow *editWindow = new EditItemWindow(itemToEdit);
+	connect(editWindow, SIGNAL(itemEdited(LibraryItem*)), this, SLOT(editLibraryItem(LibraryItem*)));
     editWindow->show();
+}
+
+void MainWindow::editLibraryItem(LibraryItem *editedData) {
+	// TO IMPLEMENT
 }
