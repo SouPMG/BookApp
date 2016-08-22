@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 	// setup mainwindow configuration
 	resize(800, 600);
+    ui->mainContent->setCurrentIndex(0);
 
 	// setup mainwindow welcome text
 	ui->mainTextLabel->setText("<h1>Welcome to BookApp!</h1>"

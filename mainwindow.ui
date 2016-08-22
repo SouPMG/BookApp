@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>904</width>
-    <height>918</height>
+    <width>800</width>
+    <height>606</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>720</width>
-    <height>400</height>
+    <width>800</width>
+    <height>550</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -47,7 +47,7 @@
       <item>
        <widget class="QStackedWidget" name="mainContent">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="welcomeText">
          <widget class="QLabel" name="mainTextLabel">
@@ -105,6 +105,12 @@
               <layout class="QVBoxLayout" name="verticalLayout_4">
                <item>
                 <layout class="QFormLayout" name="genericInfoFormLayout">
+                 <property name="labelAlignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="formAlignment">
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                 </property>
                  <item row="0" column="0">
                   <widget class="QLabel" name="isbnLabel">
                    <property name="text">
@@ -188,6 +194,12 @@
               <layout class="QVBoxLayout" name="verticalLayout_3">
                <item>
                 <layout class="QFormLayout" name="bookInfoFormLayout">
+                 <property name="labelAlignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="formAlignment">
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                 </property>
                  <item row="0" column="0">
                   <widget class="QLabel" name="bookAuthorLabel">
                    <property name="text">
@@ -257,6 +269,12 @@
               <layout class="QVBoxLayout" name="verticalLayout">
                <item>
                 <layout class="QFormLayout" name="formLayout">
+                 <property name="labelAlignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="formAlignment">
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                 </property>
                  <item row="0" column="0">
                   <widget class="QLabel" name="eBookAuthorLabel">
                    <property name="text">
@@ -378,7 +396,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>904</width>
+     <width>800</width>
      <height>30</height>
     </rect>
    </property>
