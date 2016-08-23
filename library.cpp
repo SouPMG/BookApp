@@ -65,7 +65,13 @@ void Library::removeItem(LibraryItem *item) {
 	}
 }
 
-LibraryItem* Library::extract() {
+void Library::editItemAt(LibraryItem *item, int position) {
+	LibraryItem *selectedItemGeneric = this->at(position);
+	//selectedItemGeneric = item;
+	selectedItemGeneric = new Book("ciao");
+}
+
+LibraryItem *Library::extract() {
 	Node* n = first;
 	first = first->next;
 	LibraryItem* aux = n->info;
@@ -85,10 +91,9 @@ LibraryItem *Library::at(int index) const {
 	} else {
 		return NULL;
 	}
-
 }
 
-Library& Library::operator =(const Library &l) {
+Library &Library::operator =(const Library &l) {
 	if (this != &l) { // operator!= between pointers
 		destroy(first);
 		first = copy(l.first);

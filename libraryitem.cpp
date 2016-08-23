@@ -34,6 +34,10 @@ float LibraryItem::getTimeRead() const {
 }
 
 // setter methods
+void LibraryItem::setIsbn(QString newIsbn) {
+	isbn = newIsbn;
+}
+
 void LibraryItem::setTitle(QString newTitle) {
 	title = newTitle;
 }

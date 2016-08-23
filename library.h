@@ -2,6 +2,8 @@
 #define LIBRARY_H
 
 #include "libraryitem.h"
+#include "book.h"
+#include "ebook.h"
 
 class Library {
 	friend class LibraryIterator;
@@ -40,6 +42,7 @@ class Library {
 		int size() const;
 		LibraryItem* at(int) const; // get library item at a given index
 		void addItem(LibraryItem*);
+		void editItemAt(LibraryItem*, int);
 		void removeItem(LibraryItem*);
 		LibraryItem* extract();
 

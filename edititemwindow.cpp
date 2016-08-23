@@ -124,6 +124,7 @@ QGroupBox *EditItemWindow::addBookInfo(Book *bookItem) {
 	// book pages
 	bookPagesField = new QSpinBox();
 	bookPagesField->setMinimum(0);
+	bookPagesField->setMaximum(10000);
 	bookPagesField->setValue(bookItem->numberOfPages());
 	// book release number
 	bookReleaseField = new QComboBox();
@@ -183,10 +184,12 @@ QGroupBox *EditItemWindow::addEBookInfo(eBook *eBookItem) {
 	// eBook file size
 	fileSizeField = new QSpinBox();
 	fileSizeField->setMinimum(0);
+	fileSizeField->setMaximum(10000);
 	fileSizeField->setValue(eBookItem->getFileSize());
 	// eBook pages
 	eBookPagesField = new QSpinBox();
 	eBookPagesField->setMinimum(0);
+	eBookPagesField->setMaximum(10000);
 	eBookPagesField->setValue(eBookItem->numberOfPages());
 
 	QFormLayout *eBookInfoFormLayout = new QFormLayout();

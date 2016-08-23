@@ -53,7 +53,7 @@ void MainWindow::connectActions() const {
 	connect(ui->aboutAction,      SIGNAL(triggered()), this, SLOT(aboutActionTriggered()));
 }
 
-void MainWindow::refreshLibraryModel() const {
+void MainWindow::refreshLibraryView() const {
 	QStringList list;
 	for (Library::LibraryIterator it = library.begin(); it != library.end(); it++) {
 		list << library[it]->getTitle();
@@ -103,14 +103,14 @@ void MainWindow::addNewLibraryItem(LibraryItem *newItem) {
 	if (newBook) {
 		// we have a book
 		library.addItem(newBook);
-		refreshLibraryModel();
+		refreshLibraryView();
 		return;
 	}
 	eBook *newEBook = dynamic_cast<eBook*>(newItem);
 	if (newEBook) {
 		// we have an e-book
 		library.addItem(newEBook);
-		refreshLibraryModel();
+		refreshLibraryView();
 		return;
 	}
 }
@@ -170,5 +170,9 @@ void MainWindow::editItemTriggered(LibraryItem *itemToEdit) {
 }
 
 void MainWindow::editLibraryItem(LibraryItem *editedData) {
-	// TO IMPLEMENT
+	// returning from edit window we still have the item edited selected
+	int position = ui->libraryListView->currentIndex().row();
+	library.editItemAt(editedData, position);
+	refreshLibraryView();
+	emit ui->libraryListView->clicked(ui->libraryListView->currentIndex());
 }

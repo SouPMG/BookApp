@@ -29,6 +29,7 @@ class LibraryItem {
         float getTimeRead() const;
 
         // setter methods
+		void setIsbn(QString);
 		void setTitle(QString);
 		void setPublisher(QString);
 		void setCoverImage(QString);

@@ -26,7 +26,7 @@ class MainWindow : public QMainWindow {
 
 		// private utility methods
 		void connectActions() const;
-		void refreshLibraryModel() const;
+		void refreshLibraryView() const;
 
 	public:
 		explicit MainWindow(QWidget *parent = 0);
