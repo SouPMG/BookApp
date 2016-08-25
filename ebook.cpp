@@ -7,7 +7,7 @@ eBook::eBook(QString isbn, QString title, QString publisher, QString cover, unsi
 
 // virtual clone method overloaded
 eBook* eBook::clone() const {
-	return new eBook ( *this );
+	return new eBook (*this);
 }
 
 // getter methods
@@ -32,23 +32,23 @@ unsigned int eBook::numberOfPages() const {
 }
 
 // setter methods
-void eBook::setAuthor ( QString newAuthor ) {
+void eBook::setAuthor(QString newAuthor) {
 	author = newAuthor;
 }
 
-void eBook::setGenre ( QString newGenre ) {
+void eBook::setGenre(QString newGenre) {
 	genre = newGenre;
 }
 
-void eBook::setFormat ( QString newFormat ) {
+void eBook::setFormat(QString newFormat) {
 	format = newFormat;
 }
 
-void eBook::setFileSize ( float newFileSize ) {
+void eBook::setFileSize(float newFileSize) {
 	fileSize = newFileSize;
 }
 
-void eBook::setPages ( unsigned int numberOfPages ) {
+void eBook::setPages(unsigned int numberOfPages) {
 	pages = numberOfPages;
 }
 

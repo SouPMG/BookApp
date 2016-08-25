@@ -40,11 +40,11 @@ class Library {
 
 		bool empty() const;
 		int size() const;
-		LibraryItem* at(int) const; // get library item at a given index
 		void addItem(LibraryItem*);
 		void editItemAt(LibraryItem*, int);
 		void removeItem(LibraryItem*);
 		LibraryItem* extract();
+		LibraryItem* at(int) const; // get library item at a given index
 
 		//Operators
 		Library& operator =(const Library&); // deep allocation

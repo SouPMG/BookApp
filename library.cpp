@@ -9,7 +9,7 @@ Library::Library() : first(0) {}
 // deep copy constructor using private method copy
 Library::Library(const Library &l) : first(copy(l.first)) {}
 
-Library::Node* Library::copy(Node *n) {
+Library::Node *Library::copy(Node *n) {
 	if (!n) {
 		return 0;
 	} else {
@@ -66,9 +66,38 @@ void Library::removeItem(LibraryItem *item) {
 }
 
 void Library::editItemAt(LibraryItem *item, int position) {
-	LibraryItem *selectedItemGeneric = this->at(position);
-	//selectedItemGeneric = item;
-	selectedItemGeneric = new Book("ciao");
+	LibraryItem *current = this->at(position);
+
+	// generic informations
+	current->setIsbn(item->getIsbn());
+	current->setTitle(item->getTitle());
+	current->setPublisher(item->getPublisher());
+	//current->setCoverImage(item->getCoverImage());
+	current->setPublicationYear(item->getYearPublished());
+	current->rate(item->getRating());
+
+	// specific informations
+	Book *itemBook = dynamic_cast<Book*> (item);
+	if (itemBook) {
+		Book* currentBook = dynamic_cast<Book*> (current);
+		currentBook->setAuthor(itemBook->getAuthor());
+		currentBook->setGenre(itemBook->getGenre());
+		currentBook->setPages(itemBook->numberOfPages());
+		currentBook->setReleaseNumber(itemBook->getReleaseNumber());
+
+		return;
+	}
+	eBook *itemEBook = dynamic_cast<eBook*> (item);
+	if (itemEBook) {
+		eBook *currentEBook = dynamic_cast<eBook*> (current);
+		currentEBook->setAuthor(itemEBook->getAuthor());
+		currentEBook->setGenre(itemEBook->getGenre());
+		currentEBook->setFormat(itemEBook->getFormat());
+		currentEBook->setFileSize(itemEBook->getFileSize());
+		currentEBook->setPages(itemEBook->numberOfPages());
+
+		return;
+	}
 }
 
 LibraryItem *Library::extract() {
