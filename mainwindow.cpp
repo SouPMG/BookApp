@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "additemwindow.h"
 #include "edititemwindow.h"
+#include "readingtimerwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
 	ui->setupUi(this);
@@ -24,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // connect edit button clicked signal to mainwindow slot that will re-emit custom clicked signal with proper parameters
     connect(ui->editItemButton, SIGNAL(clicked(bool)), this, SLOT(emitEditButtonClicked(bool)));
     connect(this, SIGNAL(editButtonClicked(LibraryItem*)), this, SLOT(editItemTriggered(LibraryItem*)));
+
+	// start reading!
+	connect(ui->startReadingButton, SIGNAL(clicked()), this, SLOT(startReading()));
 
 	// setup library variables
 	library = Library();
@@ -172,7 +176,15 @@ void MainWindow::editItemTriggered(LibraryItem *itemToEdit) {
 void MainWindow::editLibraryItem(LibraryItem *editedData) {
 	// returning from edit window we still have the item edited selected
 	int position = ui->libraryListView->currentIndex().row();
+	//QMessageBox::information(this, "debug", QString::number(position));
 	library.editItemAt(editedData, position);
 	refreshLibraryView();
-	emit ui->libraryListView->clicked(ui->libraryListView->currentIndex());
+	ui->mainContent->setCurrentIndex(0);
+}
+
+// start reading!
+void MainWindow::startReading() {
+	//QMessageBox::information(this, "debug", "reading...");
+	ReadingTimerWindow *timerWindow = new ReadingTimerWindow();
+	timerWindow->show();
 }

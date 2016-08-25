@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     ebook.cpp \
     library.cpp \
     additemwindow.cpp \
-    edititemwindow.cpp
+    edititemwindow.cpp \
+    readingtimerwindow.cpp
 
 HEADERS  += mainwindow.h \
     libraryitem.h \
@@ -27,11 +28,13 @@ HEADERS  += mainwindow.h \
     ebook.h \
     library.h \
     additemwindow.h \
-    edititemwindow.h
+    edititemwindow.h \
+    readingtimerwindow.h
 
 FORMS    += mainwindow.ui \
     additemwindow.ui \
-    edititemwindow.ui
+    edititemwindow.ui \
+    readingtimerwindow.ui
 
 RESOURCES += \
     library.qrc
