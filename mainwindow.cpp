@@ -11,12 +11,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	resize(800, 600);
 	ui->mainContent->setCurrentIndex(0);
 
+	// connect menu actions
 	connectActions();
 
 	// connect item display functionalities
     connect(ui->libraryListView, SIGNAL(clicked(QModelIndex)), this, SLOT(showDetails(QModelIndex)));
 
-    // connect edit button clicked signal to mainwindow slot that will re-emit custom clicked signal with proper parameters
+	// connect edit button clicked signal to mainwindow slot that will re-emit custom clicked signal with proper parameters and trigger the edit
 	connect(ui->editItemButton, SIGNAL(clicked()), this, SLOT(emitEditButtonClicked()));
     connect(this, SIGNAL(editButtonClicked(LibraryItem*)), this, SLOT(editItemTriggered(LibraryItem*)));
 
@@ -125,7 +126,8 @@ void MainWindow::showDetails(QModelIndex index) {
     ui->yearData->setText(QString::number(selectedItemGeneric->getYearPublished()));
     ui->ratingData->setText(QString::number(selectedItemGeneric->getRating()));
 
-	ui->timeRead->display(selectedItemGeneric->getTimeRead());
+	ui->timeRead->setDigitCount(8);
+	ui->timeRead->display(QDateTime::fromTime_t(selectedItemGeneric->getTimeRead()).toUTC().toString("hh:mm:ss"));
 
 	// again, let's see what kind of item we have
 	Book *selectedItemBook = dynamic_cast<Book*>(selectedItemGeneric);
