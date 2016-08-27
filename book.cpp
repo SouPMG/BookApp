@@ -1,7 +1,7 @@
 #include "book.h"
 
 // can be instantiated specifying only the isbn, everything else has a default value
-Book::Book(QString isbn, QString title, QString publisher, QString cover, unsigned int year, unsigned int rating, float time,
+Book::Book(QString isbn, QString title, QString publisher, QString cover, unsigned int year, unsigned int rating, int time,
 			 QString author, QString genre, unsigned int pages, unsigned int release)
     : LibraryItem(isbn, title, publisher, cover, year, rating, time), author(author), genre(genre), pages(pages), release(release) {}
 

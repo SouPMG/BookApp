@@ -11,10 +11,10 @@ class LibraryItem {
 		QString coverImage; // path + file name for the cover image (.jpg or .png)
 		unsigned int yearPublished;
 		unsigned int rating; // rating: number of stars from 1 to 5
-        float timeRead;
+		int timeRead; // time reading actual item in seconds
 	public:
 		// constructor
-        LibraryItem(QString, QString = "undefined", QString = "undefined", QString = "undefined", unsigned int = 1900, unsigned int = 0, float = 0);
+		LibraryItem(QString, QString = "undefined", QString = "undefined", QString = "undefined", unsigned int = 1900, unsigned int = 0, int = 0);
 
 		// pure virtual methods
 		virtual LibraryItem* clone() const = 0;
@@ -35,10 +35,10 @@ class LibraryItem {
 		void setCoverImage(QString);
 		void setPublicationYear(unsigned int);
 		void rate(unsigned int);
-        void setTimeRead(float);
+		void setTimeRead(int);
 
         // other methods
-        void addTimeRead(float);
+		void addTimeRead(int);
 
 		// operators
 		bool operator==(const LibraryItem&) const;

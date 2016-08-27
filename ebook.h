@@ -16,7 +16,7 @@ class eBook : public LibraryItem {
 		unsigned int pages;
 	public:
 		// constructor
-        eBook(QString, QString = "undefined", QString = "undefined", QString = "undefined", unsigned int = 1900, unsigned int = 0, float = 0,
+		eBook(QString, QString = "undefined", QString = "undefined", QString = "undefined", unsigned int = 1900, unsigned int = 0, int = 0,
 				QString = "undefined", QString = "undefined", QString = "undefined", float = 0, unsigned int = 0);
 
 		// implementation of pure virtual methods inherited by libraryItem
