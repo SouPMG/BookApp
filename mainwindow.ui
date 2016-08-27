@@ -20,7 +20,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
      <layout class="QHBoxLayout" name="mainLayout">
       <item>
@@ -351,6 +351,18 @@
              </widget>
             </item>
             <item>
+             <widget class="QGroupBox" name="timeReadGroup">
+              <property name="title">
+               <string>You have been reading this for</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_2">
+               <item>
+                <widget class="QLCDNumber" name="timeRead"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
              <layout class="QHBoxLayout" name="buttonsLayout">
               <item>
                <widget class="QPushButton" name="editItemButton">
@@ -397,7 +409,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>30</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuBook">

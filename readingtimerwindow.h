@@ -16,6 +16,7 @@ class ReadingTimerWindow : public QDialog {
 		Ui::ReadingTimerWindow *ui;
 
 		QLCDNumber *counter;
+		QTimer *timer;
 
 	public:
 		explicit ReadingTimerWindow(QWidget *parent = 0);

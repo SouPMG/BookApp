@@ -8,6 +8,8 @@ ReadingTimerWindow::ReadingTimerWindow(QWidget *parent) : QDialog(parent), ui(ne
 	resize(500, 200);
 
 	counter = new QLCDNumber(this);
+	timer = new QTimer(this);
+
 	QPushButton *startButton = new QPushButton("Start");
 	QPushButton *pauseButton = new QPushButton("Pause");
 	QPushButton *stopButton = new QPushButton("Stop");
@@ -23,6 +25,8 @@ ReadingTimerWindow::ReadingTimerWindow(QWidget *parent) : QDialog(parent), ui(ne
 
 	setLayout(mainLayout);
 
+	connect(timer, SIGNAL(timeout()), this, SLOT(updateCounter()));
+
 	connect(startButton, SIGNAL(clicked()), this, SLOT(startCounting()));
 	connect(pauseButton, SIGNAL(clicked()), this, SLOT(pauseCounting()));
 	connect(stopButton, SIGNAL(clicked(bool)), this, SLOT(stopCounting()));
@@ -33,20 +37,18 @@ ReadingTimerWindow::~ReadingTimerWindow() {
 }
 
 void ReadingTimerWindow::startCounting() {
-	QTimer *timer = new QTimer(this);
-	connect(timer, SIGNAL(timeout()), this, SLOT(updateCounter()));
 	timer->start(1000);
 }
 
 void ReadingTimerWindow::pauseCounting() {
-
+	timer->stop();
 }
 
 void ReadingTimerWindow::stopCounting() {
-	emit quitSession(0);
+	emit quitSession(counter->intValue());
 	close();
 }
 
 void ReadingTimerWindow::updateCounter() {
-	//counter->s
+	counter->display(QString::number(counter->intValue() + 1));
 }

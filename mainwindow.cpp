@@ -129,6 +129,8 @@ void MainWindow::showDetails(QModelIndex index) {
     ui->yearData->setText(QString::number(selectedItemGeneric->getYearPublished()));
     ui->ratingData->setText(QString::number(selectedItemGeneric->getRating()));
 
+	ui->timeRead->display(selectedItemGeneric->getTimeRead());
+
 	// again, let's see what kind of item we have
 	Book *selectedItemBook = dynamic_cast<Book*>(selectedItemGeneric);
 	if (selectedItemBook) {
@@ -175,16 +177,23 @@ void MainWindow::editItemTriggered(LibraryItem *itemToEdit) {
 
 void MainWindow::editLibraryItem(LibraryItem *editedData) {
 	// returning from edit window we still have the item edited selected
-	int position = ui->libraryListView->currentIndex().row();
-	//QMessageBox::information(this, "debug", QString::number(position));
+	QModelIndex index = ui->libraryListView->currentIndex();
+	int position = index.row();
 	library.editItemAt(editedData, position);
 	refreshLibraryView();
-	ui->mainContent->setCurrentIndex(0);
+	emit ui->libraryListView->clicked(index);
 }
 
 // start reading!
 void MainWindow::startReading() {
-	//QMessageBox::information(this, "debug", "reading...");
 	ReadingTimerWindow *timerWindow = new ReadingTimerWindow();
+	connect(timerWindow, SIGNAL(quitSession(int)), this, SLOT(updateTimeRead(int)));
 	timerWindow->show();
+}
+
+void MainWindow::updateTimeRead(int timeToAdd) {
+	QModelIndex index = ui->libraryListView->currentIndex();
+	int position = index.row();
+	library.at(position)->addTimeRead(timeToAdd);
+	emit ui->libraryListView->clicked(index);
 }

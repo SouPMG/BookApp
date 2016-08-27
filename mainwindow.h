@@ -52,6 +52,7 @@ class MainWindow : public QMainWindow {
 
 		// start reading slots
 		void startReading();
+		void updateTimeRead(int);
 };
 
 #endif // MAINWINDOW_H
