@@ -54,6 +54,9 @@ class MainWindow : public QMainWindow {
 		void startReading();
 		void updateTimeRead(int);
 		void resetTimeRead();
+
+		// save library slot
+		void saveLibrary();
 };
 
 #endif // MAINWINDOW_H

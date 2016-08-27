@@ -416,7 +416,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuBook">
@@ -424,7 +424,7 @@
      <string>Boo&amp;k</string>
     </property>
     <addaction name="addItemAction"/>
-    <addaction name="actionSave"/>
+    <addaction name="saveLibraryAction"/>
    </widget>
    <widget class="QMenu" name="menu">
     <property name="title">
@@ -453,8 +453,8 @@
     <bool>false</bool>
    </attribute>
    <addaction name="addItemAction"/>
-   <addaction name="removeItemAction"/>
    <addaction name="editItemAction"/>
+   <addaction name="removeItemAction"/>
   </widget>
   <action name="addItemAction">
    <property name="icon">
@@ -469,6 +469,10 @@
    </property>
   </action>
   <action name="removeItemAction">
+   <property name="icon">
+    <iconset resource="library.qrc">
+     <normaloff>:/library/books/images/icons/book_remove.png</normaloff>:/library/books/images/icons/book_remove.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Remove Item</string>
    </property>
@@ -482,8 +486,12 @@
    </property>
   </action>
   <action name="editItemAction">
+   <property name="icon">
+    <iconset resource="library.qrc">
+     <normaloff>:/library/books/images/icons/book_edit.png</normaloff>:/library/books/images/icons/book_edit.png</iconset>
+   </property>
    <property name="text">
-    <string>Edit Item</string>
+    <string>&amp;Edit Item</string>
    </property>
    <property name="toolTip">
     <string>Edit a library item</string>
@@ -491,15 +499,15 @@
   </action>
   <action name="resetTimerAction">
    <property name="text">
-    <string>Reset reading timer</string>
+    <string>Re&amp;set reading timer</string>
    </property>
    <property name="toolTip">
     <string>Reset reading timer for the current item</string>
    </property>
   </action>
-  <action name="actionSave">
+  <action name="saveLibraryAction">
    <property name="text">
-    <string>Save</string>
+    <string>&amp;Save</string>
    </property>
    <property name="toolTip">
     <string>Save your library</string>

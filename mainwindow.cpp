@@ -47,11 +47,12 @@ MainWindow::~MainWindow() {
 
 // utility methods
 void MainWindow::connectActions() const {
-	connect(ui->addItemAction,    SIGNAL(triggered()), this, SLOT(addItemActionTriggered()));
-	connect(ui->removeItemAction, SIGNAL(triggered()), this, SLOT(removeItemActionTriggered()));
-	connect(ui->editItemAction,   SIGNAL(triggered()), this, SLOT(emitEditButtonClicked()));
-	connect(ui->aboutAction,      SIGNAL(triggered()), this, SLOT(aboutActionTriggered()));
-	connect(ui->resetTimerAction, SIGNAL(triggered()), this, SLOT(resetTimeRead()));
+	connect(ui->addItemAction,     SIGNAL(triggered()), this, SLOT(addItemActionTriggered()));
+	connect(ui->removeItemAction,  SIGNAL(triggered()), this, SLOT(removeItemActionTriggered()));
+	connect(ui->editItemAction,    SIGNAL(triggered()), this, SLOT(emitEditButtonClicked()));
+	connect(ui->aboutAction,       SIGNAL(triggered()), this, SLOT(aboutActionTriggered()));
+	connect(ui->resetTimerAction,  SIGNAL(triggered()), this, SLOT(resetTimeRead()));
+	connect(ui->saveLibraryAction, SIGNAL(triggered()), this, SLOT(saveLibrary()));
 }
 
 void MainWindow::refreshLibraryView() const {
@@ -208,4 +209,23 @@ void MainWindow::resetTimeRead() {
 			emit ui->libraryListView->clicked(index);
 		}
 	}
+}
+
+// save functionality
+void MainWindow::saveLibrary() {
+	QFile *file = new QFile(":/library/library.xml");
+	file->open(QIODevice::WriteOnly);
+
+	QXmlStreamWriter stream(file);
+	stream.setAutoFormatting(true);
+
+	stream.writeStartDocument();
+
+	stream.writeStartElement("libraryitem");
+	stream.writeTextElement("isbn", "12345");
+	stream.writeEndElement();
+
+	stream.writeEndDocument();
+
+	file->close();
 }
