@@ -1,3 +1,5 @@
 <RCC>
-    <qresource prefix="/library/books"/>
+    <qresource prefix="/library/books">
+        <file>images/icons/book_add.png</file>
+    </qresource>
 </RCC>
