@@ -46,13 +46,14 @@ class MainWindow : public QMainWindow {
 		void showDetails(QModelIndex);
 
         // edit item slots
-        void emitEditButtonClicked(bool);
+		void emitEditButtonClicked();
         void editItemTriggered(LibraryItem*);
 		void editLibraryItem(LibraryItem*);
 
 		// start reading slots
 		void startReading();
 		void updateTimeRead(int);
+		void resetTimeRead();
 };
 
 #endif // MAINWINDOW_H

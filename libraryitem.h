@@ -39,6 +39,7 @@ class LibraryItem {
 
         // other methods
 		void addTimeRead(int);
+		void resetTimer();
 
 		// operators
 		bool operator==(const LibraryItem&) const;

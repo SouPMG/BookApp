@@ -9,21 +9,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 	// setup mainwindow configuration
 	resize(800, 600);
-    ui->mainContent->setCurrentIndex(0);
-
-	// setup mainwindow welcome text
-	ui->mainTextLabel->setText("<h1>Welcome to BookApp!</h1>"
-							   "<p>From here you can add or remove books from your library or edit them from the list.</p>");
-	ui->mainTextLabel->adjustSize();
-
-	// setup library text
-	ui->libraryLabel->setText("Your library:");
+	ui->mainContent->setCurrentIndex(0);
 
 	connectActions();
+
+	// connect item display functionalities
     connect(ui->libraryListView, SIGNAL(clicked(QModelIndex)), this, SLOT(showDetails(QModelIndex)));
 
     // connect edit button clicked signal to mainwindow slot that will re-emit custom clicked signal with proper parameters
-    connect(ui->editItemButton, SIGNAL(clicked(bool)), this, SLOT(emitEditButtonClicked(bool)));
+	connect(ui->editItemButton, SIGNAL(clicked()), this, SLOT(emitEditButtonClicked()));
     connect(this, SIGNAL(editButtonClicked(LibraryItem*)), this, SLOT(editItemTriggered(LibraryItem*)));
 
 	// start reading!
@@ -54,7 +48,9 @@ MainWindow::~MainWindow() {
 void MainWindow::connectActions() const {
 	connect(ui->addItemAction,    SIGNAL(triggered()), this, SLOT(addItemActionTriggered()));
 	connect(ui->removeItemAction, SIGNAL(triggered()), this, SLOT(removeItemActionTriggered()));
+	connect(ui->editItemAction,   SIGNAL(triggered()), this, SLOT(emitEditButtonClicked()));
 	connect(ui->aboutAction,      SIGNAL(triggered()), this, SLOT(aboutActionTriggered()));
+	connect(ui->resetTimerAction, SIGNAL(triggered()), this, SLOT(resetTimeRead()));
 }
 
 void MainWindow::refreshLibraryView() const {
@@ -161,7 +157,7 @@ void MainWindow::showDetails(QModelIndex index) {
 }
 
 // edit button slots
-void MainWindow::emitEditButtonClicked(bool) {
+void MainWindow::emitEditButtonClicked() {
     QModelIndex index = ui->libraryListView->currentIndex();
     int position = index.row();
     LibraryItem *selectedItem = library.at(position);
@@ -196,4 +192,18 @@ void MainWindow::updateTimeRead(int timeToAdd) {
 	int position = index.row();
 	library.at(position)->addTimeRead(timeToAdd);
 	emit ui->libraryListView->clicked(index);
+}
+
+void MainWindow::resetTimeRead() {
+	QModelIndex index = ui->libraryListView->currentIndex();
+	int position = index.row();
+	QMessageBox::StandardButton reply;
+
+	if (position >= 0) {
+		reply = QMessageBox::question(this, "Reset timer", "Are you sure you want to reset the timer? This action can not be undone.", QMessageBox::Yes | QMessageBox::No);
+		if (reply == QMessageBox::Yes) {
+			library.at(position)->resetTimer();
+			emit ui->libraryListView->clicked(index);
+		}
+	}
 }

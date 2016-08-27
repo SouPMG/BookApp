@@ -67,6 +67,10 @@ void LibraryItem::addTimeRead(int timeToAdd) {
     timeRead += timeToAdd;
 }
 
+void LibraryItem::resetTimer() {
+	timeRead = 0;
+}
+
 // operators
 bool LibraryItem::operator==(const LibraryItem& item) const {
 	return getIsbn() == item.getIsbn();
