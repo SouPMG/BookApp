@@ -39,7 +39,7 @@ void EditItemWindow::setUpEditForm(LibraryItem *item) {
 	}
 	eBook *eBookItem = dynamic_cast<eBook*>(item);
 	if (eBookItem) {
-		itemType = "eBook";
+		itemType = "ebook";
 		editMainLayout->addWidget(addEBookInfo(eBookItem));
 	}
 
