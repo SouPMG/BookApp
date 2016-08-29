@@ -56,6 +56,8 @@ class AddItemWindow : public QDialog {
 		unsigned int getCurrentRating() const;
 		unsigned int getCurrentRelease() const;
 
+		bool emptyFields() const;
+
 	public:
 		explicit AddItemWindow(QWidget *parent = 0);
 		~AddItemWindow();

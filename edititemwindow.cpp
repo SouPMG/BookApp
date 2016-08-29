@@ -245,36 +245,54 @@ unsigned int EditItemWindow::getCurrentRelease() const {
 	return 0; // TODO: implement exception
 }
 
+bool EditItemWindow::emptyFields() const {
+	QString isbn = isbnTextField->text();
+	QString title = titleTextField->text();
+	QString publisher = publisherTextField->text();
+	QString bookAuthor = bookAuthorTextField->text();
+	QString eBookAuthor = eBookAuthorTextField->text();
+
+	if (isbn == "" || title == "" || publisher == "" || (bookAuthor == "" && eBookAuthor == "")) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 // slots
 void EditItemWindow::editDataSubmitted() {
-	LibraryItem *newItem;
+	if (!emptyFields()) {
+		LibraryItem *newItem;
 
-	QString itemISBN = isbnTextField->text();
-	QString itemTitle = titleTextField->text();
-	QString itemPublisher = publisherTextField->text();
-	//QString itemCoverImage = coverImageTextField->text();
-	unsigned int itemYearPublished = yearPublishedField->currentText().toInt();
-	unsigned int itemRating = getCurrentRating();
+		QString itemISBN = isbnTextField->text();
+		QString itemTitle = titleTextField->text();
+		QString itemPublisher = publisherTextField->text();
+		//QString itemCoverImage = coverImageTextField->text();
+		unsigned int itemYearPublished = yearPublishedField->currentText().toInt();
+		unsigned int itemRating = getCurrentRating();
 
-	if (itemType == "book") {
-		QString itemAuthor = bookAuthorTextField->text();
-		QString itemGenre = bookGenreField->currentText();
-		unsigned int itemPages = bookPagesField->value();
-		unsigned int itemRelease = getCurrentRelease();
+		if (itemType == "book") {
+			QString itemAuthor = bookAuthorTextField->text();
+			QString itemGenre = bookGenreField->currentText();
+			unsigned int itemPages = bookPagesField->value();
+			unsigned int itemRelease = getCurrentRelease();
 
-		newItem = new Book(itemISBN, itemTitle, itemPublisher, "itemCoverImage", itemYearPublished, itemRating, 0, itemAuthor, itemGenre, itemPages, itemRelease);
-	} else if (itemType == "ebook") {
-		QString itemAuthor = eBookAuthorTextField->text();
-		QString itemGenre = eBookGenreField->currentText();
-		QString itemFormat = fileFormatField->currentText();
-		float itemSize = fileSizeField->value();
-		unsigned int itemPages = eBookPagesField->value();
+			newItem = new Book(itemISBN, itemTitle, itemPublisher, "itemCoverImage", itemYearPublished, itemRating, 0, itemAuthor, itemGenre, itemPages, itemRelease);
+		} else if (itemType == "ebook") {
+			QString itemAuthor = eBookAuthorTextField->text();
+			QString itemGenre = eBookGenreField->currentText();
+			QString itemFormat = fileFormatField->currentText();
+			float itemSize = fileSizeField->value();
+			unsigned int itemPages = eBookPagesField->value();
 
-		newItem = new eBook(itemISBN, itemTitle, itemPublisher, "itemCoverImage", itemYearPublished, itemRating, 0, itemAuthor, itemGenre, itemFormat, itemSize, itemPages);
+			newItem = new eBook(itemISBN, itemTitle, itemPublisher, "itemCoverImage", itemYearPublished, itemRating, 0, itemAuthor, itemGenre, itemFormat, itemSize, itemPages);
+		} else {
+			// if everything fails build a default book with given mandatory ISBN
+			newItem = new Book(itemISBN);
+		}
+		emit itemEdited(newItem);
+		close();
 	} else {
-		// if everything fails build a default book with given mandatory ISBN
-		newItem = new Book(itemISBN);
+		QMessageBox::warning(this, "About", "You must fill in all the required informations.");
 	}
-	emit itemEdited(newItem);
-	close();
 }

@@ -29,7 +29,7 @@ void AddItemWindow::setupAddItemForm() {
 	isbnTextField = new QLineEdit(this);
 	titleTextField = new QLineEdit(this);
 	publisherTextField = new QLineEdit(this);
-	coverImageTextField = new QLineEdit(this);
+	//coverImageTextField = new QLineEdit(this);
 
 	yearPublishedField = new QComboBox(this);
 	for (int i = 1900; i < 2020; i++) {
@@ -72,7 +72,7 @@ void AddItemWindow::setupAddItemForm() {
 	basicInfoForm->addRow("ISBN:", isbnTextField);
 	basicInfoForm->addRow("Title:", titleTextField);
 	basicInfoForm->addRow("Publisher:", publisherTextField);
-	basicInfoForm->addRow("Cover image:", coverImageTextField);
+	//basicInfoForm->addRow("Cover image:", coverImageTextField);
 	basicInfoForm->addRow("Publication year:", yearPublishedField);
 	basicInfoForm->addRow("Rating:", ratingLayout);
 
@@ -224,35 +224,55 @@ unsigned int AddItemWindow::getCurrentRelease() const {
 	return 0; // TODO: implement exception
 }
 
-void AddItemWindow::newItemSubmitted() {
-	LibraryItem *newItem;
+bool AddItemWindow::emptyFields() const {
+	QString isbn = isbnTextField->text();
+	QString title = titleTextField->text();
+	QString publisher = publisherTextField->text();
+	QString bookAuthor = bookAuthorTextField->text();
+	QString eBookAuthor = eBookAuthorTextField->text();
 
-	QString itemISBN = isbnTextField->text();
-	QString itemTitle = titleTextField->text();
-	QString itemPublisher = publisherTextField->text();
-	QString itemCoverImage = coverImageTextField->text();
-	unsigned int itemYearPublished = yearPublishedField->currentText().toInt();
-	unsigned int itemRating = getCurrentRating();
-
-	if (radioButtonBook->isChecked()) {
-		QString itemAuthor = bookAuthorTextField->text();
-		QString itemGenre = bookGenreField->currentText();
-		unsigned int itemPages = bookPagesField->value();
-		unsigned int itemRelease = getCurrentRelease();
-
-        newItem = new Book(itemISBN, itemTitle, itemPublisher, itemCoverImage, itemYearPublished, itemRating, 0, itemAuthor, itemGenre, itemPages, itemRelease);
-	} else if (radioButtonEBook->isChecked()) {
-		QString itemAuthor = eBookAuthorTextField->text();
-		QString itemGenre = eBookGenreField->currentText();
-		QString itemFormat = fileFormatField->currentText();
-		float itemSize = fileSizeField->value();
-		unsigned int itemPages = eBookPagesField->value();
-
-        newItem = new eBook(itemISBN, itemTitle, itemPublisher, itemCoverImage, itemYearPublished, itemRating, 0, itemAuthor, itemGenre, itemFormat, itemSize, itemPages);
+	if (isbn == "" || title == "" || publisher == "" || (bookAuthor == "" && eBookAuthor == "")) {
+		return true;
 	} else {
-		// if everything fails build a default book with given mandatory ISBN
-		newItem = new Book(itemISBN);
+		return false;
 	}
-	emit itemAdded(newItem);
-	close();
+}
+
+void AddItemWindow::newItemSubmitted() {
+	if (!emptyFields()) {
+		LibraryItem *newItem;
+
+		QString itemISBN = isbnTextField->text();
+		QString itemTitle = titleTextField->text();
+		QString itemPublisher = publisherTextField->text();
+
+		//itemCoverImage = "/path/to/image.png"; // TODO: implement image
+
+		unsigned int itemYearPublished = yearPublishedField->currentText().toInt();
+		unsigned int itemRating = getCurrentRating();
+
+		if (radioButtonBook->isChecked()) {
+			QString itemAuthor = bookAuthorTextField->text();
+			QString itemGenre = bookGenreField->currentText();
+			unsigned int itemPages = bookPagesField->value();
+			unsigned int itemRelease = getCurrentRelease();
+
+			newItem = new Book(itemISBN, itemTitle, itemPublisher, "itemCoverImage", itemYearPublished, itemRating, 0, itemAuthor, itemGenre, itemPages, itemRelease);
+		} else if (radioButtonEBook->isChecked()) {
+			QString itemAuthor = eBookAuthorTextField->text();
+			QString itemGenre = eBookGenreField->currentText();
+			QString itemFormat = fileFormatField->currentText();
+			float itemSize = fileSizeField->value();
+			unsigned int itemPages = eBookPagesField->value();
+
+			newItem = new eBook(itemISBN, itemTitle, itemPublisher, "itemCoverImage", itemYearPublished, itemRating, 0, itemAuthor, itemGenre, itemFormat, itemSize, itemPages);
+		} else {
+			// if everything fails build a default book with given mandatory ISBN
+			newItem = new Book(itemISBN);
+		}
+		emit itemAdded(newItem);
+		close();
+	} else {
+		QMessageBox::warning(this, "About", "You must fill in all the required informations.");
+	}
 }
