@@ -215,10 +215,10 @@ void MainWindow::resetTimeRead() {
 
 // save functionality
 void MainWindow::saveLibrary() {
-	QFile *file = new QFile(":/data/library/library.xml");
-	file->open(QIODevice::WriteOnly);
+	QFile file("library.xml");
+	file.open(QIODevice::WriteOnly);
 
-	QXmlStreamWriter stream(file);
+	QXmlStreamWriter stream(&file);
 	stream.setAutoFormatting(true);
 
 	stream.writeStartDocument();
@@ -229,5 +229,5 @@ void MainWindow::saveLibrary() {
 
 	stream.writeEndDocument();
 
-	file->close();
+	file.close();
 }

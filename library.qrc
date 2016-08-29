@@ -4,7 +4,4 @@
         <file>icons/book_edit.png</file>
         <file>icons/book_remove.png</file>
     </qresource>
-    <qresource prefix="/data">
-        <file>library/library.xml</file>
-    </qresource>
 </RCC>
