@@ -459,7 +459,7 @@
   <action name="addItemAction">
    <property name="icon">
     <iconset resource="library.qrc">
-     <normaloff>:/library/books/images/icons/book_add.png</normaloff>:/library/books/images/icons/book_add.png</iconset>
+     <normaloff>:/images/icons/book_add.png</normaloff>:/images/icons/book_add.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Add New Item</string>
@@ -471,7 +471,7 @@
   <action name="removeItemAction">
    <property name="icon">
     <iconset resource="library.qrc">
-     <normaloff>:/library/books/images/icons/book_remove.png</normaloff>:/library/books/images/icons/book_remove.png</iconset>
+     <normaloff>:/images/icons/book_remove.png</normaloff>:/images/icons/book_remove.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Remove Item</string>
@@ -488,7 +488,7 @@
   <action name="editItemAction">
    <property name="icon">
     <iconset resource="library.qrc">
-     <normaloff>:/library/books/images/icons/book_edit.png</normaloff>:/library/books/images/icons/book_edit.png</iconset>
+     <normaloff>:/images/icons/book_edit.png</normaloff>:/images/icons/book_edit.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Edit Item</string>

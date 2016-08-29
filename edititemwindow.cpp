@@ -5,6 +5,8 @@ EditItemWindow::EditItemWindow(LibraryItem *item, QWidget *parent) : QDialog(par
     ui->setupUi(this);
     setModal(true);
 
+	setWindowTitle("Edit item");
+
     setUpEditForm(item);
 }
 

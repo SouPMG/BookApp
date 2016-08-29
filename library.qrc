@@ -1,7 +1,10 @@
 <RCC>
-    <qresource prefix="/library/books">
-        <file>images/icons/book_add.png</file>
-        <file>images/icons/book_edit.png</file>
-        <file>images/icons/book_remove.png</file>
+    <qresource prefix="/images">
+        <file>icons/book_add.png</file>
+        <file>icons/book_edit.png</file>
+        <file>icons/book_remove.png</file>
+    </qresource>
+    <qresource prefix="/data">
+        <file>library/library.xml</file>
     </qresource>
 </RCC>

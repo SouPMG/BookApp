@@ -4,8 +4,9 @@
 ReadingTimerWindow::ReadingTimerWindow(QWidget *parent) : QDialog(parent), ui(new Ui::ReadingTimerWindow) {
 	ui->setupUi(this);
 
-	setModal(true);
+	setWindowTitle("Reading timer");
 	resize(500, 200);
+	setModal(true);
 
 	counter = new QLCDNumber(this);
 	timer = new QTimer(this);

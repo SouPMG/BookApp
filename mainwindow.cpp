@@ -8,7 +8,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	ui->setupUi(this);
 
 	// setup mainwindow configuration
+	setWindowTitle("BookApp");
 	resize(800, 600);
+
 	ui->mainContent->setCurrentIndex(0);
 
 	// connect menu actions
@@ -213,7 +215,7 @@ void MainWindow::resetTimeRead() {
 
 // save functionality
 void MainWindow::saveLibrary() {
-	QFile *file = new QFile(":/library/library.xml");
+	QFile *file = new QFile(":/data/library/library.xml");
 	file->open(QIODevice::WriteOnly);
 
 	QXmlStreamWriter stream(file);
