@@ -1,6 +1,8 @@
 #include "edititemwindow.h"
 #include "ui_edititemwindow.h"
 
+#include <QDebug>
+
 EditItemWindow::EditItemWindow(LibraryItem *item, QWidget *parent) : QDialog(parent), ui(new Ui::EditItemWindow) {
     ui->setupUi(this);
     setModal(true);
@@ -246,17 +248,15 @@ unsigned int EditItemWindow::getCurrentRelease() const {
 }
 
 bool EditItemWindow::emptyFields() const {
-	QString isbn = isbnTextField->text();
-	QString title = titleTextField->text();
-	QString publisher = publisherTextField->text();
-	QString bookAuthor = bookAuthorTextField->text();
-	QString eBookAuthor = eBookAuthorTextField->text();
-
-	if (isbn == "" || title == "" || publisher == "" || (bookAuthor == "" && eBookAuthor == "")) {
+	if (isbnTextField->text().isEmpty() ||
+			titleTextField->text().isEmpty() ||
+			publisherTextField->text().isEmpty() ||
+			(bookAuthorTextField->text().isEmpty() && eBookAuthorTextField->text().isEmpty())) {
 		return true;
 	} else {
 		return false;
 	}
+	return true;
 }
 
 // slots
@@ -278,6 +278,7 @@ void EditItemWindow::editDataSubmitted() {
 			unsigned int itemRelease = getCurrentRelease();
 
 			newItem = new Book(itemISBN, itemTitle, itemPublisher, "itemCoverImage", itemYearPublished, itemRating, 0, itemAuthor, itemGenre, itemPages, itemRelease);
+			emit itemEdited(newItem);
 		} else if (itemType == "ebook") {
 			QString itemAuthor = eBookAuthorTextField->text();
 			QString itemGenre = eBookGenreField->currentText();
@@ -286,13 +287,10 @@ void EditItemWindow::editDataSubmitted() {
 			unsigned int itemPages = eBookPagesField->value();
 
 			newItem = new eBook(itemISBN, itemTitle, itemPublisher, "itemCoverImage", itemYearPublished, itemRating, 0, itemAuthor, itemGenre, itemFormat, itemSize, itemPages);
-		} else {
-			// if everything fails build a default book with given mandatory ISBN
-			newItem = new Book(itemISBN);
+			emit itemEdited(newItem);
 		}
-		emit itemEdited(newItem);
 		close();
 	} else {
-		QMessageBox::warning(this, "About", "You must fill in all the required informations.");
+		QMessageBox::warning(this, "Edit item", "You must fill in all the required informations.");
 	}
 }
