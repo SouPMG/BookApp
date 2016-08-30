@@ -25,6 +25,7 @@ class MainWindow : public QMainWindow {
 		QStringListModel *model;
 
 		// private utility methods
+		void loadLibrary();
 		void connectActions() const;
 		void refreshLibraryView() const;
 

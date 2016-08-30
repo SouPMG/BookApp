@@ -4,6 +4,8 @@
 #include "edititemwindow.h"
 #include "readingtimerwindow.h"
 
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
 	ui->setupUi(this);
 
@@ -26,17 +28,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	// start reading!
 	connect(ui->startReadingButton, SIGNAL(clicked()), this, SLOT(startReading()));
 
-	// setup library variables
-	library = Library();
-
-	/**/Book *tempBook = new Book("12345", "Trial Book", "Myself", "/etc/opt/fuck", 1993, 5);
-	/**/library.addItem(tempBook);
-
+	// load items from local xml database if there are any
+	//loadLibrary();
 	model = new QStringListModel(this);
-
-	/**/QStringList tempList;
-	/**/tempList << tempBook->getTitle();
-	/**/model->setStringList(tempList);
+	refreshLibraryView();
 
 	ui->libraryListView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->libraryListView->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -213,21 +208,211 @@ void MainWindow::resetTimeRead() {
 	}
 }
 
-// save functionality
+// save/load functionalities
+void MainWindow::loadLibrary() {
+	// file related variables
+	QString filename = "library.xml";
+	QFile file(filename);
+
+	// library related variables
+	library = Library();
+	Book *book;
+	eBook *ebook;
+
+	if (file.open(QIODevice::ReadOnly)) {
+		QXmlStreamReader stream(&file);
+
+		// skip tokens
+		//stream.readNext(); // doctype
+		//stream.readNext(); // root
+
+		while (!stream.atEnd()) {
+			if (stream.isStartElement()) {
+				if (stream.name().toString() == "book") {
+					book = new Book("");
+
+					stream.readNextStartElement();
+					stream.readNext();
+					book->setIsbn(stream.text().toString());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					book->setTitle(stream.text().toString());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					book->setPublisher(stream.text().toString());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					book->setPublicationYear(stream.text().toInt());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					book->rate(stream.text().toInt());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					book->setAuthor(stream.text().toString());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					book->setGenre(stream.text().toString());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					book->setPages(stream.text().toInt());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					book->setReleaseNumber(stream.text().toInt());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					book->setTimeRead(stream.text().toInt());
+					stream.readNext();
+
+					library.addItem(book);
+				}
+				if (stream.name().toString() == "ebook") {
+					ebook = new eBook("");
+
+					stream.readNextStartElement();
+					stream.readNext();
+					ebook->setIsbn(stream.text().toString());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					ebook->setTitle(stream.text().toString());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					ebook->setPublisher(stream.text().toString());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					ebook->setPublicationYear(stream.text().toInt());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					ebook->rate(stream.text().toInt());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					ebook->setAuthor(stream.text().toString());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					ebook->setGenre(stream.text().toString());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					ebook->setFormat(stream.text().toString());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					ebook->setFileSize(stream.text().toInt());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					ebook->setPages(stream.text().toInt());
+					stream.readNext();
+
+					stream.readNextStartElement();
+					stream.readNext();
+					ebook->setTimeRead(stream.text().toInt());
+					stream.readNext();
+
+					library.addItem(ebook);
+				}
+			}
+			stream.readNext();
+		}
+		if (stream.hasError()) {
+			QMessageBox::warning(this, "Load library", stream.errorString());
+		}
+	} else {
+		QMessageBox::warning(this, "Load library", "There was an error while opening the file to load the library.");
+	}
+}
+
 void MainWindow::saveLibrary() {
-	QFile file("library.xml");
-	file.open(QIODevice::WriteOnly);
+	// file related variables
+	QString filename = "library.xml";
+	QFile file(filename);
 
-	QXmlStreamWriter stream(&file);
-	stream.setAutoFormatting(true);
+	// library related variables
+	Library *temp = new Library(library);
 
-	stream.writeStartDocument();
+	if (file.open(QIODevice::WriteOnly)) {
+		QXmlStreamWriter stream(&file);
+		stream.setAutoFormatting(true);
 
-	stream.writeStartElement("libraryitem");
-	stream.writeTextElement("isbn", "12345");
-	stream.writeEndElement();
+		stream.writeStartDocument();
+		stream.writeStartElement("library"); // root element
 
-	stream.writeEndDocument();
+		while (!temp->empty()) {
+			LibraryItem *item = temp->extract();
 
-	file.close();
+			Book *itemBook = dynamic_cast<Book*>(item);
+			if (itemBook) {
+				stream.writeStartElement("book");
+				stream.writeTextElement("isbn",      itemBook->getIsbn());
+				stream.writeTextElement("title",     itemBook->getTitle());
+				stream.writeTextElement("publisher", itemBook->getPublisher());
+				stream.writeTextElement("year",      QString::number(itemBook->getYearPublished()));
+				stream.writeTextElement("rating",    QString::number(itemBook->getRating()));
+				stream.writeTextElement("author",    itemBook->getAuthor());
+				stream.writeTextElement("genre",     itemBook->getGenre());
+				stream.writeTextElement("pages",     QString::number(itemBook->numberOfPages()));
+				stream.writeTextElement("release",   QString::number(itemBook->getReleaseNumber()));
+				stream.writeTextElement("time",      QString::number(itemBook->getTimeRead()));
+				stream.writeEndElement();
+			}
+
+			eBook *itemEBook = dynamic_cast<eBook*>(item);
+			if (itemEBook) {
+				stream.writeStartElement("ebook");
+				stream.writeTextElement("isbn",      itemEBook->getIsbn());
+				stream.writeTextElement("title",     itemEBook->getTitle());
+				stream.writeTextElement("publisher", itemEBook->getPublisher());
+				stream.writeTextElement("year",      QString::number(itemEBook->getYearPublished()));
+				stream.writeTextElement("rating",    QString::number(itemEBook->getRating()));
+				stream.writeTextElement("author",    itemEBook->getAuthor());
+				stream.writeTextElement("genre",     itemEBook->getGenre());
+				stream.writeTextElement("format",    itemEBook->getFormat());
+				stream.writeTextElement("size",      QString::number(itemEBook->getFileSize()));
+				stream.writeTextElement("pages",     QString::number(itemEBook->numberOfPages()));
+				stream.writeTextElement("time",      QString::number(itemEBook->getTimeRead()));
+				stream.writeEndElement();
+			}
+		}
+
+		stream.writeEndElement(); // /root element
+		stream.writeEndDocument();
+
+		file.close();
+
+		QMessageBox::information(this, "Save library", "Library has been successfully saved!");
+	} else {
+		QMessageBox::warning(this, "Save library", "There was an error while opening the file to save the library.");
+	}
 }
