@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 	// setup mainwindow configuration
 	setWindowTitle("BookApp");
+	ui->mainToolBar->setMovable(false);
 	resize(800, 650);
 
 	ui->mainContent->setCurrentIndex(0);
@@ -132,7 +133,7 @@ void MainWindow::showDetails(QModelIndex index) {
         ui->bookAuthorData->setText(selectedItemBook->getAuthor());
         ui->bookGenreData->setText(selectedItemBook->getGenre());
         ui->bookPagesData->setText(QString::number(selectedItemBook->numberOfPages()));
-        ui->bookReleaseData->setText(QString::number(selectedItemBook->getReleaseNumber()));
+		ui->bookReleaseData->setText(QString::number(selectedItemBook->getReleaseNumber()));
 
         ui->eBookInfoGroup->hide();
         ui->bookInfoGroup->show();
@@ -143,7 +144,7 @@ void MainWindow::showDetails(QModelIndex index) {
         ui->eBookAuthorData->setText(selectedItemEBook->getAuthor());
         ui->eBookGenreData->setText(selectedItemEBook->getGenre());
         ui->eBookFormatData->setText(selectedItemEBook->getFormat());
-        ui->eBookSizeData->setText(QString::number(selectedItemEBook->getFileSize()));
+		ui->eBookSizeData->setText(QString::number(selectedItemEBook->getFileSize()) + " MB");
         ui->eBookPagesData->setText(QString::number(selectedItemEBook->numberOfPages()));
 
         ui->bookInfoGroup->hide();
