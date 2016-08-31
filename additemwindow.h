@@ -47,15 +47,18 @@ class AddItemWindow : public QDialog {
 		QDoubleSpinBox *fileSizeField;
 		QSpinBox *eBookPagesField;
 
-		// class widgets to show only when selected
+		// group boxes to show only with relative item type
 		QGroupBox *bookFormGroup;
 		QGroupBox *eBookFormGroup;
 
 		Ui::AddItemWindow *ui;
+
+		// utility methods
 		void setupAddItemForm();
 		unsigned int getCurrentRating() const;
 		unsigned int getCurrentRelease() const;
 
+		// validation
 		bool emptyFields() const;
 
 	public:

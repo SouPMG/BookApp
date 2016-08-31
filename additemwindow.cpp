@@ -4,15 +4,15 @@
 AddItemWindow::AddItemWindow(QWidget *parent) : QDialog(parent), ui(new Ui::AddItemWindow) {
 	ui->setupUi(this);
 
-	// Setup window
+	// dialog basic settings
 	setWindowTitle("Add a new item to your library");
 	setModal(true);
 	QDialog::reject(); // Esc closes the window
 
-	// Setup form elements
+	// setup form elements
 	setupAddItemForm();
 
-	// Optimize window size
+	// optimize window size
 	adjustSize();
 }
 
@@ -28,7 +28,7 @@ void AddItemWindow::setupAddItemForm() {
 	isbnTextField = new QLineEdit(this);
 	titleTextField = new QLineEdit(this);
 	publisherTextField = new QLineEdit(this);
-	//coverImageTextField = new QLineEdit(this);
+	//coverImageTextField = new QLineEdit(this); to be implemented
 
 	yearPublishedField = new QComboBox(this);
 	for (int i = 1900; i < 2020; i++) {
@@ -244,9 +244,7 @@ void AddItemWindow::newItemSubmitted() {
 		QString itemISBN = isbnTextField->text();
 		QString itemTitle = titleTextField->text();
 		QString itemPublisher = publisherTextField->text();
-
-		//itemCoverImage = "/path/to/image.png"; // TODO: implement image
-
+		//itemCoverImage = "/path/to/image.png"; // TODO: implement cover image
 		unsigned int itemYearPublished = yearPublishedField->currentText().toInt();
 		unsigned int itemRating = getCurrentRating();
 
@@ -256,7 +254,7 @@ void AddItemWindow::newItemSubmitted() {
 			unsigned int itemPages = bookPagesField->value();
 			unsigned int itemRelease = getCurrentRelease();
 
-			newItem = new Book(itemISBN, itemTitle, itemPublisher, "itemCoverImage", itemYearPublished, itemRating, 0, itemAuthor, itemGenre, itemPages, itemRelease);
+			newItem = new Book(itemISBN, itemTitle, itemPublisher, "/path/to/image.png", itemYearPublished, itemRating, 0, itemAuthor, itemGenre, itemPages, itemRelease);
 		} else if (radioButtonEBook->isChecked()) {
 			QString itemAuthor = eBookAuthorTextField->text();
 			QString itemGenre = eBookGenreField->currentText();
@@ -264,7 +262,7 @@ void AddItemWindow::newItemSubmitted() {
 			float itemSize = fileSizeField->value();
 			unsigned int itemPages = eBookPagesField->value();
 
-			newItem = new eBook(itemISBN, itemTitle, itemPublisher, "itemCoverImage", itemYearPublished, itemRating, 0, itemAuthor, itemGenre, itemFormat, itemSize, itemPages);
+			newItem = new eBook(itemISBN, itemTitle, itemPublisher, "/path/to/image.png", itemYearPublished, itemRating, 0, itemAuthor, itemGenre, itemFormat, itemSize, itemPages);
 		} else {
 			// if everything fails build a default book with given mandatory ISBN
 			newItem = new Book(itemISBN);
