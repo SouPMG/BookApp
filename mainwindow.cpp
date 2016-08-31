@@ -18,7 +18,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	connectActions();
 
 	// connect item display functionalities
-    connect(ui->libraryListView, SIGNAL(clicked(QModelIndex)), this, SLOT(showDetails(QModelIndex)));
+	connect(ui->libraryListView, SIGNAL(clicked(QModelIndex)), this, SLOT(showDetails(QModelIndex)));
+	connect(ui->libraryListView, SIGNAL(activated(QModelIndex)), this, SLOT(showDetails(QModelIndex)));
 
 	// connect edit button clicked signal to mainwindow slot that will re-emit custom clicked signal with proper parameters and trigger the edit
 	connect(ui->editItemButton, SIGNAL(clicked()), this, SLOT(emitEditButtonClicked()));
