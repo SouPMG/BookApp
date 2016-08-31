@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 	// setup mainwindow configuration
 	setWindowTitle("BookApp");
-	resize(800, 600);
+	resize(800, 650);
 
 	ui->mainContent->setCurrentIndex(0);
 
@@ -357,9 +357,6 @@ void MainWindow::saveLibrary() {
 	QString filename = "library.xml";
 	QFile file(filename);
 
-	// library related variables
-	Library *temp = new Library(library);
-
 	if (file.open(QIODevice::WriteOnly)) {
 		QXmlStreamWriter stream(&file);
 		stream.setAutoFormatting(true);
@@ -367,8 +364,9 @@ void MainWindow::saveLibrary() {
 		stream.writeStartDocument();
 		stream.writeStartElement("library"); // root element
 
-		while (!temp->empty()) {
-			LibraryItem *item = temp->extract();
+		// to prevent the library being saved in a reverse order we start saving from the last element
+		for (int i = library.size(); i >= 0; i--) {
+			LibraryItem *item = library.at(i);
 
 			Book *itemBook = dynamic_cast<Book*>(item);
 			if (itemBook) {

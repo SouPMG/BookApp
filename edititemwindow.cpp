@@ -256,7 +256,6 @@ bool EditItemWindow::emptyFields() const {
 	} else {
 		return false;
 	}
-	return true;
 }
 
 // slots
