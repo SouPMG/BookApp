@@ -3,5 +3,9 @@
         <file>icons/book_add.png</file>
         <file>icons/book_edit.png</file>
         <file>icons/book_remove.png</file>
+        <file>icons/save.png</file>
+        <file>icons/about.png</file>
+        <file>icons/exit.png</file>
+        <file>icons/reset.png</file>
     </qresource>
 </RCC>

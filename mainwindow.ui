@@ -416,7 +416,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>30</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuBook">
@@ -425,6 +425,8 @@
     </property>
     <addaction name="addItemAction"/>
     <addaction name="saveLibraryAction"/>
+    <addaction name="separator"/>
+    <addaction name="exitAction"/>
    </widget>
    <widget class="QMenu" name="menu">
     <property name="title">
@@ -481,6 +483,10 @@
    </property>
   </action>
   <action name="aboutAction">
+   <property name="icon">
+    <iconset resource="library.qrc">
+     <normaloff>:/images/icons/about.png</normaloff>:/images/icons/about.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;About BookApp</string>
    </property>
@@ -498,6 +504,10 @@
    </property>
   </action>
   <action name="resetTimerAction">
+   <property name="icon">
+    <iconset resource="library.qrc">
+     <normaloff>:/images/icons/reset.png</normaloff>:/images/icons/reset.png</iconset>
+   </property>
    <property name="text">
     <string>Re&amp;set reading timer</string>
    </property>
@@ -506,11 +516,27 @@
    </property>
   </action>
   <action name="saveLibraryAction">
+   <property name="icon">
+    <iconset resource="library.qrc">
+     <normaloff>:/images/icons/save.png</normaloff>:/images/icons/save.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Save</string>
    </property>
    <property name="toolTip">
     <string>Save your library</string>
+   </property>
+  </action>
+  <action name="exitAction">
+   <property name="icon">
+    <iconset resource="library.qrc">
+     <normaloff>:/images/icons/exit.png</normaloff>:/images/icons/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="toolTip">
+    <string>Close BookApp</string>
    </property>
   </action>
  </widget>
