@@ -1,8 +1,6 @@
 #include "edititemwindow.h"
 #include "ui_edititemwindow.h"
 
-#include <QDebug>
-
 EditItemWindow::EditItemWindow(LibraryItem *item, QWidget *parent) : QDialog(parent), ui(new Ui::EditItemWindow) {
     ui->setupUi(this);
     setModal(true);
@@ -165,9 +163,9 @@ QGroupBox *EditItemWindow::addBookInfo(Book *bookItem) {
 QGroupBox *EditItemWindow::addEBookInfo(eBook *eBookItem) {
 	// building utility variables
 	QStringList genres;
-	genres << "Drama" << "Classic" << "Comic" << "Crime" << "Fable" << "Fairy tale" << "Fanfiction" << "Fantasy"
-		   << "Folklore" << "Hisorical Fiction" << "Horror" << "Humor" << "Legend" << "Magical realism" << "Metafiction"
-		   << "Mistery" << "Mithology" << "Realistic fiction" << "Science fiction" << "Short story" << "Thriller"
+	genres << "Adventure" << "Biography" << "Classic" << "Comic" << "Crime" << "Drama" << "Fable" << "Fairy tale" << "Fanfiction" << "Fantasy"
+		   << "Folklore" << "Historical" << "Hisorical Fiction" << "Horror" << "Humor" << "Legend" << "Magical realism" << "Metafiction"
+		   << "Mistery" << "Mithology" << "Poetry" << "Realistic fiction" << "Romantic" << "Science fiction" << "Short story" << "Thriller"
 		   << "Tall tale" << "Western";
 
 	// eBook author
@@ -186,7 +184,7 @@ QGroupBox *EditItemWindow::addEBookInfo(eBook *eBookItem) {
 	fileFormatField->addItem(".pdf");
 	fileFormatField->setCurrentText(eBookItem->getFormat());
 	// eBook file size
-	fileSizeField = new QSpinBox();
+	fileSizeField = new QDoubleSpinBox();
 	fileSizeField->setMinimum(0);
 	fileSizeField->setMaximum(10000);
 	fileSizeField->setValue(eBookItem->getFileSize());
@@ -203,7 +201,7 @@ QGroupBox *EditItemWindow::addEBookInfo(eBook *eBookItem) {
 	eBookInfoFormLayout->addRow("File size(MB):", fileSizeField);
 	eBookInfoFormLayout->addRow("Pages:", eBookPagesField);
 
-	QGroupBox *eBookInfoGroup = new QGroupBox();
+	QGroupBox *eBookInfoGroup = new QGroupBox("E-Book informations");
 	eBookInfoGroup->setLayout(eBookInfoFormLayout);
 
 	return eBookInfoGroup;
@@ -248,14 +246,16 @@ unsigned int EditItemWindow::getCurrentRelease() const {
 }
 
 bool EditItemWindow::emptyFields() const {
-	if (isbnTextField->text().isEmpty() ||
-			titleTextField->text().isEmpty() ||
-			publisherTextField->text().isEmpty() ||
-			(bookAuthorTextField->text().isEmpty() && eBookAuthorTextField->text().isEmpty())) {
+	if (isbnTextField->text().isEmpty() || titleTextField->text().isEmpty() || publisherTextField->text().isEmpty()) {
 		return true;
-	} else {
-		return false;
 	}
+	if (itemType == "book" && bookAuthorTextField->text().isEmpty()) {
+		return true;
+	}
+	if (itemType == "ebook" && eBookAuthorTextField->text().isEmpty()) {
+		return true;
+	}
+	return false;
 }
 
 // slots

@@ -46,7 +46,7 @@ class EditItemWindow : public QDialog {
 		QLineEdit *eBookAuthorTextField;
 		QComboBox *eBookGenreField;
 		QComboBox *fileFormatField;
-		QSpinBox *fileSizeField;
+		QDoubleSpinBox *fileSizeField;
 		QSpinBox *eBookPagesField;
 
 		// item identification property

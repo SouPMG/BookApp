@@ -42,6 +42,7 @@ void AddItemWindow::setupAddItemForm() {
 	ratingThreeStarField = new QRadioButton("3 stars", this);
 	ratingFourStarField = new QRadioButton("4 stars", this);
 	ratingFiveStarField = new QRadioButton("5 stars", this);
+	ratingFiveStarField->setChecked(true);
 
 	// create Ok Cancel buttons
 	QPushButton *buttonOk = new QPushButton("Ok");
