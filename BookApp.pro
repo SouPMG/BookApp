@@ -31,7 +31,10 @@ HEADERS  += mainwindow.h \
     edititemwindow.h \
     readingtimerwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    additemwindow.ui \
+    edititemwindow.ui \
+    readingtimerwindow.ui
 
 RESOURCES += \
     library.qrc
