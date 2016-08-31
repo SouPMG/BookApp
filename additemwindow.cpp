@@ -24,7 +24,6 @@ void AddItemWindow::setupAddItemForm() {
 	// base info form components
 	radioButtonBook = new QRadioButton("Book", this);
 	radioButtonEBook = new QRadioButton("E-Book", this);
-	radioButtonBook->setChecked(true);
 
 	isbnTextField = new QLineEdit(this);
 	titleTextField = new QLineEdit(this);
@@ -42,7 +41,6 @@ void AddItemWindow::setupAddItemForm() {
 	ratingThreeStarField = new QRadioButton("3 stars", this);
 	ratingFourStarField = new QRadioButton("4 stars", this);
 	ratingFiveStarField = new QRadioButton("5 stars", this);
-	ratingFiveStarField->setChecked(true);
 
 	// create Ok Cancel buttons
 	QPushButton *buttonOk = new QPushButton("Ok");
@@ -79,6 +77,9 @@ void AddItemWindow::setupAddItemForm() {
 
 	QGroupBox *basicFormGroup = new QGroupBox("Basic informations", this);
 	basicFormGroup->setLayout(basicInfoForm);
+
+	radioButtonBook->setChecked(true);
+	ratingFiveStarField->setChecked(true);
 
 	// COMPONENTS SHOWN ONLY IF SELECTED //
 

@@ -122,7 +122,7 @@ void MainWindow::showDetails(QModelIndex index) {
     ui->titleData->setText(selectedItemGeneric->getTitle());
     ui->publisherData->setText(selectedItemGeneric->getPublisher());
     ui->yearData->setText(QString::number(selectedItemGeneric->getYearPublished()));
-    ui->ratingData->setText(QString::number(selectedItemGeneric->getRating()));
+	ui->ratingData->setText(QString::number(selectedItemGeneric->getRating()) + "★");
 
 	ui->timeRead->setDigitCount(8);
 	ui->timeRead->display(QDateTime::fromTime_t(selectedItemGeneric->getTimeRead()).toUTC().toString("hh:mm:ss"));
