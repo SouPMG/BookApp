@@ -83,9 +83,9 @@ void AddItemWindow::setupAddItemForm() {
 
 	// utility data structures
 	QStringList genres;
-	genres << "Drama" << "Classic" << "Comic" << "Crime" << "Fable" << "Fairy tale" << "Fanfiction" << "Fantasy"
-		   << "Folklore" << "Hisorical Fiction" << "Horror" << "Humor" << "Legend" << "Magical realism" << "Metafiction"
-		   << "Mistery" << "Mithology" << "Realistic fiction" << "Science fiction" << "Short story" << "Thriller"
+	genres << "Adventure" << "Biography" << "Classic" << "Comic" << "Crime" << "Drama" << "Fable" << "Fairy tale" << "Fanfiction" << "Fantasy"
+		   << "Folklore" << "Historical" << "Hisorical Fiction" << "Horror" << "Humor" << "Legend" << "Magical realism" << "Metafiction"
+		   << "Mistery" << "Mithology" << "Poetry" << "Realistic fiction" << "Romantic" << "Science fiction" << "Short story" << "Thriller"
 		   << "Tall tale" << "Western";
 
 	// create book info form components
@@ -131,7 +131,7 @@ void AddItemWindow::setupAddItemForm() {
 	fileFormatField->addItem(".epub");
 	fileFormatField->addItem(".pdf");
 
-	fileSizeField = new QSpinBox(this);
+	fileSizeField = new QDoubleSpinBox(this);
 	fileSizeField->setMinimum(0);
 	fileSizeField->setMaximum(10000);
 	fileSizeField->setValue(fileSizeField->minimum());
@@ -225,13 +225,10 @@ unsigned int AddItemWindow::getCurrentRelease() const {
 }
 
 bool AddItemWindow::emptyFields() const {
-	QString isbn = isbnTextField->text();
-	QString title = titleTextField->text();
-	QString publisher = publisherTextField->text();
-	QString bookAuthor = bookAuthorTextField->text();
-	QString eBookAuthor = eBookAuthorTextField->text();
-
-	if (isbn == "" || title == "" || publisher == "" || (bookAuthor == "" && eBookAuthor == "")) {
+	if (isbnTextField->text().isEmpty() ||
+			titleTextField->text().isEmpty() ||
+			publisherTextField->text().isEmpty() ||
+			(bookAuthorTextField->text().isEmpty() && eBookAuthorTextField->text().isEmpty())) {
 		return true;
 	} else {
 		return false;

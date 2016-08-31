@@ -44,7 +44,7 @@ class AddItemWindow : public QDialog {
 		QLineEdit *eBookAuthorTextField;
 		QComboBox *eBookGenreField;
 		QComboBox *fileFormatField;
-		QSpinBox *fileSizeField;
+		QDoubleSpinBox *fileSizeField;
 		QSpinBox *eBookPagesField;
 
 		// class widgets to show only when selected
