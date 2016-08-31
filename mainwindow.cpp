@@ -50,6 +50,7 @@ void MainWindow::connectActions() const {
 	connect(ui->aboutAction,       SIGNAL(triggered()), this, SLOT(aboutActionTriggered()));
 	connect(ui->resetTimerAction,  SIGNAL(triggered()), this, SLOT(resetTimeRead()));
 	connect(ui->saveLibraryAction, SIGNAL(triggered()), this, SLOT(saveLibrary()));
+	connect(ui->exitAction,        SIGNAL(triggered()), this, SLOT(close()));
 }
 
 void MainWindow::refreshLibraryView() const {
@@ -328,7 +329,7 @@ void MainWindow::loadLibrary() {
 
 					stream.readNextStartElement();
 					stream.readNext();
-					ebook->setFileSize(stream.text().toInt());
+					ebook->setFileSize(stream.text().toFloat());
 					stream.readNext();
 
 					stream.readNextStartElement();
