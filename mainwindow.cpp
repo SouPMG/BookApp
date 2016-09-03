@@ -73,26 +73,30 @@ void MainWindow::addItemActionTriggered() {
 }
 
 void MainWindow::removeItemActionTriggered() {
-	int position = ui->libraryListView->currentIndex().row();
-	QMessageBox::StandardButton reply;
+	if (!library.empty()) {
+		int position = ui->libraryListView->currentIndex().row();
+		QMessageBox::StandardButton reply;
 
-	if (position >= 0) {
-		reply = QMessageBox::question(this, "Delete item", "Are you sure you want to delete this item?", QMessageBox::Yes | QMessageBox::No);
-		if (reply == QMessageBox::Yes) {
-			Library::LibraryIterator it = library.begin();
-			for (int i; i < position; i++) {
-				it++;
+		if (position >= 0) {
+			reply = QMessageBox::question(this, "Delete item", "Are you sure you want to delete this item?", QMessageBox::Yes | QMessageBox::No);
+			if (reply == QMessageBox::Yes) {
+				Library::LibraryIterator it = library.begin();
+				for (int i; i < position; i++) {
+					it++;
+				}
+
+				// remove item from container
+				library.removeItem(library[it]);
+
+				// remove item from model
+				model->removeRows(position, 1);
+
+				// switch to welcome text on stacked widget
+				ui->mainContent->setCurrentIndex(0);
 			}
-
-			// remove item from container
-			library.removeItem(library[it]);
-
-			// remove item from model
-			model->removeRows(position, 1);
-
-			// switch to welcome text on stacked widget
-			ui->mainContent->setCurrentIndex(0);
 		}
+	} else {
+		QMessageBox::warning(this, "Warning", "Your library is empty! Add a new item with the 'Add new item' button.");
 	}
 }
 
@@ -167,9 +171,13 @@ void MainWindow::emitEditButtonClicked() {
 }
 
 void MainWindow::editItemTriggered(LibraryItem *itemToEdit) {
-    EditItemWindow *editWindow = new EditItemWindow(itemToEdit);
-	connect(editWindow, SIGNAL(itemEdited(LibraryItem*)), this, SLOT(editLibraryItem(LibraryItem*)));
-    editWindow->show();
+	if (!library.empty()) {
+		EditItemWindow *editWindow = new EditItemWindow(itemToEdit);
+		connect(editWindow, SIGNAL(itemEdited(LibraryItem*)), this, SLOT(editLibraryItem(LibraryItem*)));
+		editWindow->show();
+	} else {
+		QMessageBox::warning(this, "Warning", "Your library is empty! Add a new item with the 'Add new item' button.");
+	}
 }
 
 void MainWindow::editLibraryItem(LibraryItem *editedData) {
@@ -178,7 +186,7 @@ void MainWindow::editLibraryItem(LibraryItem *editedData) {
 	int position = index.row();
 	library.editItemAt(editedData, position);
 	refreshLibraryView();
-	emit ui->libraryListView->clicked(index);
+	showDetails(index);
 }
 
 // start reading!
@@ -192,7 +200,7 @@ void MainWindow::updateTimeRead(int timeToAdd) {
 	QModelIndex index = ui->libraryListView->currentIndex();
 	int position = index.row();
 	library.at(position)->addTimeRead(timeToAdd);
-	emit ui->libraryListView->clicked(index);
+	showDetails(index);
 }
 
 void MainWindow::resetTimeRead() {
@@ -204,7 +212,7 @@ void MainWindow::resetTimeRead() {
 		reply = QMessageBox::question(this, "Reset timer", "Are you sure you want to reset the timer? This action can not be undone.", QMessageBox::Yes | QMessageBox::No);
 		if (reply == QMessageBox::Yes) {
 			library.at(position)->resetTimer();
-			emit ui->libraryListView->clicked(index);
+			showDetails(index);
 		}
 	}
 }
@@ -350,8 +358,6 @@ void MainWindow::loadLibrary() {
 		if (stream.hasError()) {
 			QMessageBox::warning(this, "Load library", stream.errorString());
 		}
-	} else {
-		QMessageBox::warning(this, "Load library", "There was an error while opening the file to load the library.");
 	}
 }
 
