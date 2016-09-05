@@ -34,7 +34,7 @@ class Book : public LibraryItem {
 		void setReleaseNumber(unsigned int);
 
 		// operators
-		bool operator==(const Book&) const;
+		virtual bool operator==(const Book&) const;
 };
 
 // external operators

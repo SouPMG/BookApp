@@ -42,7 +42,7 @@ class LibraryItem {
 		void resetTimer();
 
 		// operators
-		bool operator==(const LibraryItem&) const;
+		virtual bool operator==(const LibraryItem&) const;
 };
 
 #endif // LIBRARYITEM_H

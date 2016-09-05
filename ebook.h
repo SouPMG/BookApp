@@ -37,7 +37,7 @@ class eBook : public LibraryItem {
 		void setPages(unsigned int);
 
 		// operators
-		bool operator==(const eBook&) const;
+		virtual bool operator==(const eBook&) const;
 };
 
 // external operators
